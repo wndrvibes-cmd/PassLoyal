@@ -2,7 +2,7 @@
 
 La fidélité digitale pour commerçants modernes. Cartes de fidélité compatibles **Apple Wallet** et **Google Wallet**, suivi des points, récompenses et tableau de bord en temps réel.
 
-Stack : **Next.js 15 (App Router)** · React 19 · TypeScript · Tailwind CSS · Framer Motion · lucide-react.
+Stack : **Next.js 15 (App Router)** · React 19 · TypeScript · Tailwind CSS · Framer Motion · lucide-react · Supabase.
 
 ## Démarrage
 
@@ -13,15 +13,32 @@ npm run dev
 
 Ouvre [http://localhost:3000](http://localhost:3000).
 
+### Configuration Supabase
+
+Copie `.env.local.example` vers `.env.local` et renseigne tes clés (Settings > API dans ton projet Supabase) :
+
+```
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+```
+
+Tant que ces clés ne sont pas définies, `middleware.ts` laisse passer toutes les routes sans vérifier de session — pratique pour développer l'UI avant de brancher Supabase.
+
 ## Arborescence
 
 ```
 app/                  Routes App Router (layout, page, globals.css)
+  login/               Page de connexion
+  register/            Page d'inscription
+  forgot-password/     Page de réinitialisation du mot de passe
+  dashboard/           Tableau de bord marchand (layout + page)
 components/
   layout/             Navbar, Footer
   landing/            Sections de la landing page
+  auth/               LoginForm, RegisterForm, ForgotPasswordForm, AuthShell
+  dashboard/          Sidebar, Header, StatsCards, RecentActivity, QuickActions
   ui/                 Composants UI réutilisables (à venir)
-lib/                  Helpers (utils.ts → cn())
+lib/                  Helpers (utils.ts → cn(), supabase.ts → clients Supabase)
 hooks/                Hooks React personnalisés
 services/             Appels API / logique métier
 supabase/             Client & schémas Supabase
@@ -29,6 +46,7 @@ types/                Types TypeScript partagés
 utils/                Fonctions utilitaires diverses
 public/               Assets statiques (images, icons, logos)
 styles/               Styles additionnels
+middleware.ts          Protection des routes /dashboard et redirections auth
 ```
 
 ## Alias d'import
@@ -55,4 +73,24 @@ Composants livrés et intégrés :
 | FAQ                | `components/landing/FAQ.tsx`             |
 | CTA                | `components/landing/CTA.tsx`             |
 
-> `app/page.tsx` monte actuellement `Navbar`, `Hero` et `Footer` (code fourni conservé tel quel). Les autres sections sont présentes dans le dépôt et prêtes à être ajoutées à la page quand tu le souhaites.
+> `app/page.tsx` monte toutes les sections ci-dessus, dans l'ordre du tableau.
+
+## Chapitre 2 — Authentification & Dashboard
+
+Composants livrés :
+
+| Composant            | Emplacement                                    |
+| --------------------- | ----------------------------------------------- |
+| AuthShell             | `components/auth/AuthShell.tsx`                 |
+| LoginForm             | `components/auth/LoginForm.tsx`                 |
+| RegisterForm          | `components/auth/RegisterForm.tsx`              |
+| ForgotPasswordForm    | `components/auth/ForgotPasswordForm.tsx`        |
+| Sidebar               | `components/dashboard/Sidebar.tsx`              |
+| Header                | `components/dashboard/Header.tsx`               |
+| StatsCards            | `components/dashboard/StatsCards.tsx`           |
+| RecentActivity        | `components/dashboard/RecentActivity.tsx`       |
+| QuickActions          | `components/dashboard/QuickActions.tsx`         |
+
+Pages : `/login`, `/register`, `/forgot-password`, `/dashboard`.
+
+L'authentification (email/mot de passe, inscription, connexion, déconnexion, réinitialisation) est câblée via `lib/supabase.ts` et prête à fonctionner dès que les clés Supabase sont renseignées dans `.env.local`. Les données du tableau de bord (`StatsCards`, `RecentActivity`) sont pour l'instant statiques — elles seront branchées sur Supabase dans un prochain chapitre.
