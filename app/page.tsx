@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/landing/Hero";
+import TrustedBrands from "@/components/landing/TrustedBrands";
+import HowItWorks from "@/components/landing/HowItWorks";
+import Features from "@/components/landing/Features";
+import Benefits from "@/components/landing/Benefits";
+import DashboardPreview from "@/components/landing/DashboardPreview";
+import Testimonials from "@/components/landing/Testimonials";
+import Pricing from "@/components/landing/Pricing";
+import FAQ from "@/components/landing/FAQ";
+import CTA from "@/components/landing/CTA";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
@@ -36,6 +45,15 @@ export default function Home() {
     <main className="min-h-screen bg-white">
       <Navbar />
       <Hero />
+      <TrustedBrands />
+      <HowItWorks />
+      <Features />
+      <Benefits />
+      <DashboardPreview />
+      <Testimonials />
+      <Pricing />
+      <FAQ />
+      <CTA />
       <Footer />
     </main>
   );
