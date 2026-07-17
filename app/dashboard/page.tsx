@@ -1,3 +1,4 @@
+import CustomerInsights from "@/components/dashboard/CustomerInsights";
 import QuickActions from "@/components/dashboard/QuickActions";
 import RecentActivity from "@/components/dashboard/RecentActivity";
 import StatsCards from "@/components/dashboard/StatsCards";
@@ -20,6 +21,8 @@ export default function DashboardPage() {
         </div>
         <QuickActions />
       </div>
+
+      <CustomerInsights />
     </div>
   );
 }

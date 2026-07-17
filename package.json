@@ -19,13 +19,17 @@
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.47.10",
     "zod": "^3.24.1",
-    "sonner": "^1.7.1"
+    "sonner": "^1.7.1",
+    "papaparse": "^5.4.1",
+    "xlsx": "^0.18.5",
+    "recharts": "^2.15.0"
   },
   "devDependencies": {
     "typescript": "^5.7.3",
     "@types/node": "^22.10.7",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
+    "@types/papaparse": "^5.3.15",
     "tailwindcss": "^3.4.17",
     "postcss": "^8.5.1",
     "autoprefixer": "^10.4.20",

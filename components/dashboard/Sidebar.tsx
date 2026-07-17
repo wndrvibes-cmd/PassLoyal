@@ -17,9 +17,9 @@ import { cn } from "@/lib/utils";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
 const NAV_ITEMS = [
-  { label: "Accueil", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Programmes de fidélité", href: "/dashboard/programs", icon: CreditCard },
-  { label: "Clients", href: "/dashboard/clients", icon: Users },
+  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Programmes", href: "/dashboard/programs", icon: CreditCard },
+  { label: "Clients", href: "/dashboard/customers", icon: Users },
   { label: "Récompenses", href: "/dashboard/recompenses", icon: Gift },
   { label: "Paramètres", href: "/dashboard/parametres", icon: Settings },
 ] as const;
