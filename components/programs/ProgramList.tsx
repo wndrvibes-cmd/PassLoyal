@@ -6,7 +6,7 @@ import { Plus, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import Skeleton from "@/components/ui/Skeleton";
 import { usePrograms } from "@/hooks/usePrograms";
-import { createSupabaseBrowserClient } from "@/lib/supabase";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { duplicateProgram, toggleProgramActive } from "@/services/programs";
 import type { LoyaltyProgram } from "@/types/database";
 import DeleteProgramDialog from "./DeleteProgramDialog";

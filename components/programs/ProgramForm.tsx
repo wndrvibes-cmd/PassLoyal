@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Loader2, X } from "lucide-react";
 import { toast } from "sonner";
-import { createSupabaseBrowserClient } from "@/lib/supabase";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { programSchema, type ProgramFormValues } from "@/lib/validations/program";
 import { createProgram, updateProgram } from "@/services/programs";
 import type { LoyaltyProgram } from "@/types/database";

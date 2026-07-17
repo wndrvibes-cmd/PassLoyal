@@ -45,7 +45,8 @@ components/
   programs/           ProgramList, ProgramCard, ProgramForm, ProgramSettings,
                       ProgramPreview, DeleteProgramDialog, EmptyState
   ui/                 Composants UI réutilisables (Skeleton, …)
-lib/                  Helpers (utils.ts → cn(), supabase.ts → clients Supabase)
+lib/                  Helpers (utils.ts → cn())
+  supabase/             client.ts (navigateur) et server.ts (Server Components)
   validations/         Schémas de validation zod
 hooks/                Hooks React personnalisés (usePrograms)
 services/             Appels API / logique métier (programs.ts → CRUD Supabase)
@@ -102,7 +103,7 @@ Composants livrés :
 
 Pages : `/login`, `/register`, `/forgot-password`, `/dashboard`.
 
-L'authentification (email/mot de passe, inscription, connexion, déconnexion, réinitialisation) est câblée via `lib/supabase.ts` et prête à fonctionner dès que les clés Supabase sont renseignées dans `.env.local`. Les données du tableau de bord (`StatsCards`, `RecentActivity`) sont pour l'instant statiques — elles seront branchées sur Supabase dans un prochain chapitre.
+L'authentification (email/mot de passe, inscription, connexion, déconnexion, réinitialisation) est câblée via `lib/supabase/client.ts` et prête à fonctionner dès que les clés Supabase sont renseignées dans `.env.local`. Les données du tableau de bord (`StatsCards`, `RecentActivity`) sont pour l'instant statiques — elles seront branchées sur Supabase dans un prochain chapitre.
 
 ## Chapitre 3 — Programmes de fidélité
 
