@@ -88,7 +88,7 @@ const features: Feature[] = [
 
 export default function Features() {
   return (
-    <section className="bg-[#FAFAF7] py-24 sm:py-32">
+    <section id="fonctionnalites" className="scroll-mt-20 bg-[#FAFAF7] py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

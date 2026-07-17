@@ -12,7 +12,7 @@ const ACTIONS: QuickAction[] = [
   {
     label: "Ajouter un client",
     description: "Créer une nouvelle fiche client",
-    href: "/dashboard/clients",
+    href: "/dashboard/customers",
     icon: UserPlus,
   },
   {

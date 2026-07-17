@@ -29,24 +29,30 @@ export default function RegisterForm() {
 
     setIsSubmitting(true);
 
-    const supabase = createSupabaseBrowserClient();
-    const { error: signUpError } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { business_name: businessName },
-      },
-    });
+    try {
+      const supabase = createSupabaseBrowserClient();
+      const { error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { business_name: businessName },
+        },
+      });
 
-    setIsSubmitting(false);
+      if (signUpError) {
+        setError(signUpError.message);
+        return;
+      }
 
-    if (signUpError) {
-      setError(signUpError.message);
-      return;
+      setSuccess(true);
+      router.refresh();
+    } catch (caughtError) {
+      setError(
+        caughtError instanceof Error ? caughtError.message : "Une erreur inattendue est survenue."
+      );
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setSuccess(true);
-    router.refresh();
   };
 
   if (success) {

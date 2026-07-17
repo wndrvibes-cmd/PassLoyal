@@ -80,9 +80,9 @@ export default function ProgramForm({ merchantId, program, onClose, onSaved }: P
 
     setErrors({});
     setIsSubmitting(true);
-    const supabase = createSupabaseBrowserClient();
 
     try {
+      const supabase = createSupabaseBrowserClient();
       const saved = program
         ? await updateProgram(supabase, program.id, result.data)
         : await createProgram(supabase, merchantId, result.data);

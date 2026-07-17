@@ -14,36 +14,36 @@ const FOOTER_COLUMNS = [
   {
     title: "Entreprise",
     links: [
-      { label: "À propos", href: "#" },
-      { label: "Carrières", href: "#" },
-      { label: "Blog", href: "#" },
-      { label: "Contact", href: "#contact" },
+      { label: "À propos", href: null },
+      { label: "Carrières", href: null },
+      { label: "Blog", href: null },
+      { label: "Contact", href: "mailto:contact@passloyal.fr" },
     ],
   },
   {
     title: "Support",
     links: [
-      { label: "Centre d'aide", href: "#" },
-      { label: "Documentation", href: "#" },
-      { label: "Statut du service", href: "#" },
-      { label: "Contact commercial", href: "#" },
+      { label: "Centre d'aide", href: null },
+      { label: "Documentation", href: null },
+      { label: "Statut du service", href: null },
+      { label: "Contact commercial", href: null },
     ],
   },
   {
     title: "Légal",
     links: [
-      { label: "Mentions légales", href: "#" },
-      { label: "Politique de confidentialité", href: "#" },
-      { label: "CGU", href: "#" },
-      { label: "Cookies", href: "#" },
+      { label: "Mentions légales", href: null },
+      { label: "Politique de confidentialité", href: null },
+      { label: "CGU", href: null },
+      { label: "Cookies", href: null },
     ],
   },
 ] as const;
 
 const SOCIAL_LINKS = [
-  { label: "Twitter", href: "#", icon: Twitter },
-  { label: "LinkedIn", href: "#", icon: Linkedin },
-  { label: "Instagram", href: "#", icon: Instagram },
+  { label: "Twitter (bientôt disponible)", icon: Twitter },
+  { label: "LinkedIn (bientôt disponible)", icon: Linkedin },
+  { label: "Instagram (bientôt disponible)", icon: Instagram },
 ] as const;
 
 export default function Footer() {
@@ -66,15 +66,15 @@ export default function Footer() {
               et Google Wallet, sans friction, prêtes en quelques minutes.
             </p>
             <div className="mt-6 flex items-center gap-2">
-              {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
-                <Link
+              {SOCIAL_LINKS.map(({ label, icon: Icon }) => (
+                <span
                   key={label}
-                  href={href}
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-colors hover:border-indigo-200 hover:text-indigo-600"
+                  title={label}
+                  className="flex h-9 w-9 cursor-not-allowed items-center justify-center rounded-full border border-slate-200 bg-white text-slate-300"
                 >
                   <Icon className="h-4 w-4" strokeWidth={2} />
-                </Link>
+                </span>
               ))}
             </div>
           </div>
@@ -84,16 +84,27 @@ export default function Footer() {
             <div key={col.title} className="col-span-1 md:col-span-1">
               <h3 className="text-[13px] font-semibold text-slate-900">{col.title}</h3>
               <ul className="mt-4 space-y-3">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-[13.5px] text-slate-500 transition-colors hover:text-slate-900"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
+                {col.links.map((link) =>
+                  link.href ? (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        className="text-[13.5px] text-slate-500 transition-colors hover:text-slate-900"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ) : (
+                    <li key={link.label}>
+                      <span
+                        title="Bientôt disponible"
+                        className="cursor-not-allowed text-[13.5px] text-slate-300"
+                      >
+                        {link.label}
+                      </span>
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           ))}

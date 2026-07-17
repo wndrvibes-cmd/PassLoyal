@@ -99,8 +99,8 @@ export default function CustomersPage() {
   };
 
   const handleToggleActive = async (customer: Customer) => {
-    const supabase = createSupabaseBrowserClient();
     try {
+      const supabase = createSupabaseBrowserClient();
       const updated = await toggleCustomerActive(supabase, customer.id, !customer.is_active);
       setCustomers((previous) => previous.map((item) => (item.id === updated.id ? updated : item)));
       toast.success(updated.is_active ? "Client activé." : "Client désactivé.");

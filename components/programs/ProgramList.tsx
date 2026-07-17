@@ -38,8 +38,8 @@ export default function ProgramList() {
   };
 
   const handleDuplicate = async (program: LoyaltyProgram) => {
-    const supabase = createSupabaseBrowserClient();
     try {
+      const supabase = createSupabaseBrowserClient();
       const duplicated = await duplicateProgram(supabase, program);
       setPrograms((previous) => [duplicated, ...previous]);
       toast.success("Programme dupliqué.");
@@ -51,8 +51,8 @@ export default function ProgramList() {
   };
 
   const handleToggleActive = async (program: LoyaltyProgram) => {
-    const supabase = createSupabaseBrowserClient();
     try {
+      const supabase = createSupabaseBrowserClient();
       const updated = await toggleProgramActive(supabase, program.id, !program.is_active);
       setPrograms((previous) => previous.map((item) => (item.id === updated.id ? updated : item)));
       toast.success(updated.is_active ? "Programme activé." : "Programme désactivé.");

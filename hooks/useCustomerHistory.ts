@@ -25,9 +25,8 @@ export function useCustomerHistory(customerId: string): UseCustomerHistoryResult
     setIsLoading(true);
     setError(null);
 
-    const supabase = createSupabaseBrowserClient();
-
     try {
+      const supabase = createSupabaseBrowserClient();
       const [currentCustomer, currentVisits, currentRewards] = await Promise.all([
         getCustomer(supabase, customerId),
         listCustomerVisits(supabase, customerId),

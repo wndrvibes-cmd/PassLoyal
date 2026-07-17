@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { label: "Tarifs", href: "#tarifs" },
   { label: "Démo", href: "#demo" },
   { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "mailto:contact@passloyal.fr" },
 ] as const;
 
 export default function Navbar() {
@@ -70,13 +70,13 @@ export default function Navbar() {
         {/* Desktop CTAs */}
         <div className="hidden items-center gap-2 md:flex">
           <Link
-            href="#connexion"
+            href="/login"
             className="rounded-full px-4 py-2 text-[13.5px] font-medium text-slate-700 transition-colors hover:text-slate-900"
           >
             Connexion
           </Link>
           <Link
-            href="#creer-un-compte"
+            href="/register"
             className="group relative inline-flex items-center overflow-hidden rounded-full bg-slate-900 px-4 py-2 text-[13.5px] font-medium text-white shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-slate-900/20"
           >
             <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-indigo-600 to-blue-500 transition-transform duration-300 group-hover:translate-x-0" />
@@ -163,14 +163,14 @@ export default function Navbar() {
                 className="mt-2 flex flex-col gap-2 border-t border-slate-200/70 pt-3"
               >
                 <Link
-                  href="#connexion"
+                  href="/login"
                   onClick={() => setIsMobileOpen(false)}
                   className="rounded-full px-3.5 py-2.5 text-center text-[15px] font-medium text-slate-700 hover:bg-slate-900/5"
                 >
                   Connexion
                 </Link>
                 <Link
-                  href="#creer-un-compte"
+                  href="/register"
                   onClick={() => setIsMobileOpen(false)}
                   className="rounded-full bg-gradient-to-r from-indigo-600 to-blue-500 px-3.5 py-2.5 text-center text-[15px] font-medium text-white shadow-md shadow-indigo-500/25"
                 >

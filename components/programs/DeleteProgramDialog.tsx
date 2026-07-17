@@ -23,9 +23,9 @@ export default function DeleteProgramDialog({
 
   const handleConfirm = async () => {
     setIsDeleting(true);
-    const supabase = createSupabaseBrowserClient();
 
     try {
+      const supabase = createSupabaseBrowserClient();
       await deleteProgram(supabase, program.id);
       toast.success("Programme supprimé.");
       onDeleted(program.id);

@@ -24,9 +24,8 @@ export function usePrograms(): UseProgramsResult {
     setIsLoading(true);
     setError(null);
 
-    const supabase = createSupabaseBrowserClient();
-
     try {
+      const supabase = createSupabaseBrowserClient();
       const currentMerchant = await getOrCreateCurrentMerchant(supabase);
       const currentPrograms = await listPrograms(supabase, currentMerchant.id);
       setMerchant(currentMerchant);

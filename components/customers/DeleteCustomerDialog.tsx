@@ -23,9 +23,9 @@ export default function DeleteCustomerDialog({
 
   const handleConfirm = async () => {
     setIsDeleting(true);
-    const supabase = createSupabaseBrowserClient();
 
     try {
+      const supabase = createSupabaseBrowserClient();
       await deleteCustomer(supabase, customer.id);
       toast.success("Client supprimé.");
       onDeleted(customer.id);

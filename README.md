@@ -167,4 +167,14 @@ Deux écarts volontaires par rapport au schéma fourni, documentés dans la migr
 
 Aucune colonne de photo n'a été ajoutée (non listée dans le schéma fourni) : `CustomerCard` et `CustomerDetails` affichent des initiales à la place.
 
-**Important** : cet environnement de développement n'a pas Node/npm installés, donc `npm install` et `npm run build` n'ont pas pu être exécutés ni vérifiés localement pour aucun chapitre — chaque chapitre est vérifié via un vrai déploiement Vercel après coup.
+## Audit — Correction de bugs (post-Chapitre 4)
+
+Un audit complet, testé sur le déploiement de production, a révélé et corrigé :
+
+- **Cause racine critique** : `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` ne sont pas configurées sur Vercel. `createSupabaseBrowserClient()` lève alors une exception synchrone (« Your project's URL and API key are required… ») à la construction du client. **À corriger côté utilisateur** : ajouter ces deux variables dans Vercel → Project Settings → Environment Variables, puis redéployer.
+- **Bug systémique** : cette exception était appelée hors de tout `try/catch` sur ~22 sites d'appel dans toute l'app (formulaires auth, hooks de données, actions CRUD programmes/clients), ce qui laissait boutons et écrans bloqués indéfiniment en chargement, sans aucun message d'erreur. C'est la cause réelle du bouton « Créer un compte » qui semblait ne rien faire. Corrigé partout : le client Supabase est maintenant créé à l'intérieur du bloc `try`, avec un message d'erreur visible (toast ou texte) en cas d'échec.
+- **Navbar** : « Connexion » et « Créer un compte » pointaient vers des ancres mortes (`#connexion`, `#creer-un-compte`) au lieu de `/login` et `/register`.
+- **Ancres de la landing page** : aucune section n'avait d'`id` correspondant à `#fonctionnalites`, `#tarifs`, `#demo`, `#faq` — ajoutés sur `Features`, `Pricing`, `DashboardPreview`, `FAQ`. `#contact` n'ayant pas de section dédiée, remplacé par un lien `mailto:`.
+- **Boutons inertes** : les CTA de `CTA.tsx` et les 3 boutons de `Pricing.tsx` n'avaient ni `href` ni `onClick` — ils ne faisaient rien. Convertis en liens vers `/register` (et `#demo`).
+- **Footer** : les liens sans destination réelle (À propos, Carrières, Blog, Centre d'aide, Documentation, etc., + réseaux sociaux) sont maintenant du texte non cliquable plutôt que des liens `href="#"` trompeurs — créer ce contenu (pages légales, blog…) est hors du périmètre d'une correction de bugs.
+- **Navigation dashboard cassée** : `QuickActions` pointait vers `/dashboard/clients` (inexistant) au lieu de `/dashboard/customers`. `Sidebar`, `QuickActions` et `Header` pointaient vers `/dashboard/recompenses` et `/dashboard/parametres`, qui n'existaient pas (404). Deux pages « Bientôt disponible » ont été créées pour ces routes.

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 
@@ -61,7 +62,7 @@ const plans: Plan[] = [
 
 export default function Pricing() {
   return (
-    <section className="bg-white py-24 sm:py-32">
+    <section id="tarifs" className="scroll-mt-20 bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -153,16 +154,16 @@ export default function Pricing() {
                 ))}
               </ul>
 
-              <button
-                type="button"
+              <Link
+                href="/register"
                 className={
                   plan.highlighted
-                    ? "mt-8 w-full rounded-lg bg-[#1B8A5A] py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1FAE6B]"
-                    : "mt-8 w-full rounded-lg border border-[#0F1729]/15 bg-white py-3 text-sm font-semibold text-[#0F1729] transition-colors hover:border-[#0F1729]/30"
+                    ? "mt-8 block w-full rounded-lg bg-[#1B8A5A] py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-[#1FAE6B]"
+                    : "mt-8 block w-full rounded-lg border border-[#0F1729]/15 bg-white py-3 text-center text-sm font-semibold text-[#0F1729] transition-colors hover:border-[#0F1729]/30"
                 }
               >
                 {plan.cta}
-              </button>
+              </Link>
             </motion.div>
           ))}
         </div>

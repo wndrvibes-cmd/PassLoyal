@@ -87,9 +87,9 @@ export default function ImportCustomers({ merchantId, onClose, onImported }: Imp
   const handleImport = async () => {
     if (rows.length === 0) return;
     setIsImporting(true);
-    const supabase = createSupabaseBrowserClient();
 
     try {
+      const supabase = createSupabaseBrowserClient();
       const importResult = await bulkImportCustomers(supabase, merchantId, rows);
       setResult(importResult);
       if (importResult.inserted > 0) {

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, CalendarDays } from "lucide-react";
 
@@ -51,21 +52,21 @@ export default function CTA() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
-          <button
-            type="button"
+          <Link
+            href="/register"
             className="group inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#1B8A5A] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#1FAE6B] sm:w-auto"
           >
             Commencer gratuitement
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </button>
+          </Link>
 
-          <button
-            type="button"
+          <Link
+            href="#demo"
             className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/[0.03] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/[0.08] sm:w-auto"
           >
             <CalendarDays className="h-4 w-4" />
             Demander une démonstration
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>

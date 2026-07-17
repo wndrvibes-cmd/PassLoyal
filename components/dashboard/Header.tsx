@@ -15,8 +15,12 @@ export default function Header({ onMenuClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleSignOut = async () => {
-    const supabase = createSupabaseBrowserClient();
-    await supabase.auth.signOut();
+    try {
+      const supabase = createSupabaseBrowserClient();
+      await supabase.auth.signOut();
+    } catch {
+      // Ignore: Supabase may not be configured yet, still send the user to /login.
+    }
     router.push("/login");
     router.refresh();
   };

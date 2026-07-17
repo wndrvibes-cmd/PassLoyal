@@ -31,7 +31,7 @@ export default function DashboardPreview() {
   const maxValue = Math.max(...chartValues);
 
   return (
-    <section className="bg-[#0F1729] py-24 sm:py-32">
+    <section id="demo" className="scroll-mt-20 bg-[#0F1729] py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

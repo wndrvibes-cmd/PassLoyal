@@ -66,8 +66,8 @@ export default function CustomerDetails({ customerId }: CustomerDetailsProps) {
     let isMounted = true;
 
     async function loadMerchantContext() {
-      const supabase = createSupabaseBrowserClient();
       try {
+        const supabase = createSupabaseBrowserClient();
         const currentMerchant = await getOrCreateCurrentMerchant(supabase);
         const currentPrograms = await listPrograms(supabase, currentMerchant.id);
         if (isMounted) {
@@ -93,8 +93,8 @@ export default function CustomerDetails({ customerId }: CustomerDetailsProps) {
       return;
     }
     setIsMutating(true);
-    const supabase = createSupabaseBrowserClient();
     try {
+      const supabase = createSupabaseBrowserClient();
       await addPoints(supabase, customerId, amount);
       toast.success(`+${amount} points ajoutés.`);
       setAddAmount("");
@@ -114,8 +114,8 @@ export default function CustomerDetails({ customerId }: CustomerDetailsProps) {
       return;
     }
     setIsMutating(true);
-    const supabase = createSupabaseBrowserClient();
     try {
+      const supabase = createSupabaseBrowserClient();
       await removePoints(supabase, customerId, amount);
       toast.success(`-${amount} points retirés.`);
       setRemoveAmount("");
@@ -135,8 +135,8 @@ export default function CustomerDetails({ customerId }: CustomerDetailsProps) {
       return;
     }
     setIsMutating(true);
-    const supabase = createSupabaseBrowserClient();
     try {
+      const supabase = createSupabaseBrowserClient();
       await redeemReward(supabase, customerId, rewardName.trim(), cost);
       toast.success("Récompense ajoutée.");
       setRewardName("");
@@ -151,8 +151,8 @@ export default function CustomerDetails({ customerId }: CustomerDetailsProps) {
 
   const handleCancelVisit = async (visit: CustomerVisit) => {
     setIsMutating(true);
-    const supabase = createSupabaseBrowserClient();
     try {
+      const supabase = createSupabaseBrowserClient();
       await cancelVisit(supabase, customerId, visit.id);
       toast.success("Opération annulée.");
       await reload();
@@ -165,8 +165,8 @@ export default function CustomerDetails({ customerId }: CustomerDetailsProps) {
 
   const handleCancelReward = async (reward: RewardHistoryEntry) => {
     setIsMutating(true);
-    const supabase = createSupabaseBrowserClient();
     try {
+      const supabase = createSupabaseBrowserClient();
       await cancelReward(supabase, customerId, reward.id);
       toast.success("Récompense annulée.");
       await reload();

@@ -17,20 +17,26 @@ export default function ForgotPasswordForm() {
     setError(null);
     setIsSubmitting(true);
 
-    const supabase = createSupabaseBrowserClient();
-    const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo:
-        typeof window !== "undefined" ? `${window.location.origin}/login` : undefined,
-    });
+    try {
+      const supabase = createSupabaseBrowserClient();
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo:
+          typeof window !== "undefined" ? `${window.location.origin}/login` : undefined,
+      });
 
-    setIsSubmitting(false);
+      if (resetError) {
+        setError(resetError.message);
+        return;
+      }
 
-    if (resetError) {
-      setError(resetError.message);
-      return;
+      setSuccess(true);
+    } catch (caughtError) {
+      setError(
+        caughtError instanceof Error ? caughtError.message : "Une erreur inattendue est survenue."
+      );
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setSuccess(true);
   };
 
   if (success) {

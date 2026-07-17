@@ -81,9 +81,9 @@ export default function CustomerForm({ merchantId, customer, onClose, onSaved }:
 
     setErrors({});
     setIsSubmitting(true);
-    const supabase = createSupabaseBrowserClient();
 
     try {
+      const supabase = createSupabaseBrowserClient();
       const saved = customer
         ? await updateCustomer(supabase, customer.id, result.data)
         : await createCustomer(supabase, merchantId, result.data);
