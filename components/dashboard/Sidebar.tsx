@@ -17,9 +17,9 @@ import { cn } from "@/lib/utils";
 import { createSupabaseBrowserClient } from "@/lib/supabase";
 
 const NAV_ITEMS = [
-  { label: "Tableau de bord", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Accueil", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Programmes de fidélité", href: "/dashboard/programs", icon: CreditCard },
   { label: "Clients", href: "/dashboard/clients", icon: Users },
-  { label: "Cartes de fidélité", href: "/dashboard/cartes", icon: CreditCard },
   { label: "Récompenses", href: "/dashboard/recompenses", icon: Gift },
   { label: "Paramètres", href: "/dashboard/parametres", icon: Settings },
 ] as const;
@@ -53,7 +53,9 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-6">
         {NAV_ITEMS.map((item) => {
-          const isActive = pathname === item.href;
+          const isActive =
+            pathname === item.href ||
+            (item.href !== "/dashboard" && pathname.startsWith(`${item.href}/`));
           const Icon = item.icon;
           return (
             <Link
