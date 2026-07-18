@@ -34,7 +34,7 @@ export async function GET(_request: NextRequest, { params }: RouteParams) {
     }
 
     const pkpass = await generateApplePass(card);
-    return new NextResponse(pkpass, {
+    return new NextResponse(new Uint8Array(pkpass), {
       headers: {
         "Content-Type": "application/vnd.apple.pkpass",
         "Content-Disposition": `attachment; filename="passloyal-${token}.pkpass"`,
