@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Loader2, Lock, Mail } from "lucide-react";
+import { getCurrentProfile } from "@/lib/auth/roles";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
 export default function LoginForm() {
@@ -29,7 +30,12 @@ export default function LoginForm() {
         return;
       }
 
-      router.push("/dashboard");
+      const profile = await getCurrentProfile(supabase).catch(() => null);
+      await supabase.rpc("log_audit_event", { p_action: "login" }).catch(() => {
+        // Non-blocking: audit logging should never prevent sign-in.
+      });
+
+      router.push(profile?.role === "super_admin" ? "/admin" : "/dashboard");
       router.refresh();
     } catch (caughtError) {
       setError(

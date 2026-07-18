@@ -1,6 +1,21 @@
 export const REWARD_TYPES = ["points", "stamps", "custom"] as const;
 export type RewardType = (typeof REWARD_TYPES)[number];
 
+export const ROLES = ["super_admin", "merchant", "staff", "customer"] as const;
+export type Role = (typeof ROLES)[number];
+
+export interface Profile {
+  id: string;
+  email: string | null;
+  full_name: string | null;
+  role: Role;
+  created_at: string;
+  updated_at: string;
+}
+
+export const MERCHANT_STATUSES = ["active", "suspended"] as const;
+export type MerchantStatus = (typeof MERCHANT_STATUSES)[number];
+
 export interface Merchant {
   id: string;
   user_id: string;
@@ -8,7 +23,65 @@ export interface Merchant {
   logo_url: string | null;
   phone: string | null;
   email: string | null;
+  status: MerchantStatus;
   created_at: string;
+}
+
+export const SUBSCRIPTION_PLANS = ["starter", "pro", "premium"] as const;
+export type SubscriptionPlan = (typeof SUBSCRIPTION_PLANS)[number];
+
+export const SUBSCRIPTION_STATUSES = ["trialing", "active", "past_due", "canceled"] as const;
+export type SubscriptionStatus = (typeof SUBSCRIPTION_STATUSES)[number];
+
+export interface Subscription {
+  id: string;
+  merchant_id: string;
+  plan: SubscriptionPlan;
+  price: number;
+  status: SubscriptionStatus;
+  current_period_end: string | null;
+  stripe_customer_id: string | null;
+  stripe_subscription_id: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export const SUBSCRIPTION_PAYMENT_STATUSES = ["paid", "failed", "refunded"] as const;
+export type SubscriptionPaymentStatus = (typeof SUBSCRIPTION_PAYMENT_STATUSES)[number];
+
+export interface SubscriptionPayment {
+  id: string;
+  subscription_id: string;
+  amount: number;
+  currency: string;
+  status: SubscriptionPaymentStatus;
+  paid_at: string;
+  stripe_invoice_id: string | null;
+  created_at: string;
+}
+
+export interface AuditLog {
+  id: string;
+  actor_id: string | null;
+  actor_email: string | null;
+  action: string;
+  entity_type: string | null;
+  entity_id: string | null;
+  metadata: Record<string, unknown>;
+  created_at: string;
+}
+
+export interface PlatformSettings {
+  id: string;
+  is_singleton: boolean;
+  platform_name: string;
+  logo_url: string | null;
+  support_email: string | null;
+  maintenance_mode: boolean;
+  wallet_default_primary_color: string;
+  wallet_default_secondary_color: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface LoyaltyProgram {
