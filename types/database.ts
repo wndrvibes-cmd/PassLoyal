@@ -80,3 +80,86 @@ export interface RewardHistoryEntry {
   points_used: number;
   redeemed_at: string;
 }
+
+export interface WalletCardDesign {
+  id: string;
+  merchant_id: string;
+  business_name: string | null;
+  description: string | null;
+  logo_url: string | null;
+  icon_url: string | null;
+  banner_url: string | null;
+  primary_color: string;
+  secondary_color: string;
+  address: string | null;
+  phone: string | null;
+  website: string | null;
+  social_links: Record<string, string>;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface WalletPass {
+  id: string;
+  customer_id: string;
+  card_design_id: string;
+  token: string;
+  apple_added_at: string | null;
+  google_added_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export const WALLET_SCAN_ACTIONS = ["view", "add_points", "remove_points", "redeem_reward"] as const;
+export type WalletScanAction = (typeof WALLET_SCAN_ACTIONS)[number];
+
+export interface WalletScan {
+  id: string;
+  customer_id: string;
+  action: WalletScanAction;
+  created_at: string;
+}
+
+export const NOTIFICATION_TYPES = [
+  "points_earned",
+  "reward_unlocked",
+  "special_offer",
+  "promotion",
+  "birthday",
+  "card_updated",
+] as const;
+export type NotificationType = (typeof NOTIFICATION_TYPES)[number];
+
+export interface AppNotification {
+  id: string;
+  customer_id: string;
+  type: NotificationType;
+  title: string;
+  message: string;
+  is_read: boolean;
+  created_at: string;
+}
+
+export interface PublicWalletCard {
+  token: string;
+  first_name: string;
+  last_name: string;
+  total_points: number;
+  total_visits: number;
+  loyalty_level: LoyaltyLevel;
+  member_since: string;
+  last_visit: string | null;
+  business_name: string | null;
+  card_description: string | null;
+  logo_url: string | null;
+  icon_url: string | null;
+  banner_url: string | null;
+  primary_color: string;
+  secondary_color: string;
+  address: string | null;
+  phone: string | null;
+  website: string | null;
+  social_links: Record<string, string>;
+  apple_added_at: string | null;
+  google_added_at: string | null;
+}

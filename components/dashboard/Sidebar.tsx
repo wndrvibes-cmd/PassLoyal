@@ -8,6 +8,7 @@ import {
   Gift,
   LayoutDashboard,
   LogOut,
+  QrCode,
   Settings,
   Users,
   Wallet,
@@ -20,6 +21,8 @@ const NAV_ITEMS = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { label: "Programmes", href: "/dashboard/programs", icon: CreditCard },
   { label: "Clients", href: "/dashboard/customers", icon: Users },
+  { label: "Wallet", href: "/dashboard/wallet", icon: Wallet },
+  { label: "Scanner", href: "/dashboard/scanner", icon: QrCode },
   { label: "Récompenses", href: "/dashboard/recompenses", icon: Gift },
   { label: "Paramètres", href: "/dashboard/parametres", icon: Settings },
 ] as const;

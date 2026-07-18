@@ -22,7 +22,10 @@
     "sonner": "^1.7.1",
     "papaparse": "^5.4.1",
     "xlsx": "^0.18.5",
-    "recharts": "^2.15.0"
+    "recharts": "^2.15.0",
+    "qrcode": "^1.5.4",
+    "qr-scanner": "^1.4.2",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "typescript": "^5.7.3",
@@ -30,6 +33,8 @@
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "@types/papaparse": "^5.3.15",
+    "@types/qrcode": "^1.5.5",
+    "@types/jsonwebtoken": "^9.0.7",
     "tailwindcss": "^3.4.17",
     "postcss": "^8.5.1",
     "autoprefixer": "^10.4.20",

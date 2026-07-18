@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { CustomerFormValues } from "@/lib/validations/customer";
+import { notifySafely } from "@/services/notifications";
 import {
   GENDERS,
   LOYALTY_LEVELS,
@@ -160,6 +161,13 @@ export async function addPoints(
 
   if (error) throw error;
   const customer = await refetchCustomer(supabase, customerId);
+  await notifySafely(
+    supabase,
+    customerId,
+    "points_earned",
+    "Nouveau point gagné",
+    `Vous avez gagné ${points} point${points > 1 ? "s" : ""}.`
+  );
   return { visit: data as CustomerVisit, customer };
 }
 
@@ -203,6 +211,13 @@ export async function redeemReward(
 
   if (error) throw error;
   const customer = await refetchCustomer(supabase, customerId);
+  await notifySafely(
+    supabase,
+    customerId,
+    "reward_unlocked",
+    "Récompense débloquée",
+    `Votre récompense « ${rewardName} » a été validée.`
+  );
   return { reward: data as RewardHistoryEntry, customer };
 }
 

@@ -21,12 +21,15 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { useCustomerHistory } from "@/hooks/useCustomerHistory";
+import { useWalletPass } from "@/hooks/useWalletPass";
 import { getOrCreateCurrentMerchant, listPrograms } from "@/services/programs";
 import { addPoints, cancelReward, cancelVisit, redeemReward, removePoints } from "@/services/customers";
+import { regenerateWalletToken } from "@/services/wallet";
 import type { CustomerVisit, LoyaltyLevel, LoyaltyProgram, Merchant, RewardHistoryEntry } from "@/types/database";
 import CustomerForm from "./CustomerForm";
 import CustomerHistory from "./CustomerHistory";
 import Skeleton from "@/components/ui/Skeleton";
+import QRCodeCard from "@/components/wallet/QRCodeCard";
 
 interface CustomerDetailsProps {
   customerId: string;
@@ -51,16 +54,36 @@ function formatDate(dateString: string | null) {
 }
 
 export default function CustomerDetails({ customerId }: CustomerDetailsProps) {
-  const { customer, visits, rewards, isLoading, error, reload } = useCustomerHistory(customerId);
+  const { customer, visits, rewards, scans, isLoading, error, reload } =
+    useCustomerHistory(customerId);
+  const { pass, isLoading: isWalletLoading, setPass } = useWalletPass(customerId);
 
   const [merchant, setMerchant] = useState<Merchant | null>(null);
   const [programs, setPrograms] = useState<LoyaltyProgram[]>([]);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isMutating, setIsMutating] = useState(false);
+  const [isRegenerating, setIsRegenerating] = useState(false);
   const [addAmount, setAddAmount] = useState("");
   const [removeAmount, setRemoveAmount] = useState("");
   const [rewardName, setRewardName] = useState("");
   const [rewardCost, setRewardCost] = useState("");
+
+  const handleRegenerateToken = async () => {
+    if (!pass) return;
+    setIsRegenerating(true);
+    try {
+      const supabase = createSupabaseBrowserClient();
+      const updated = await regenerateWalletToken(supabase, pass.id);
+      setPass(updated);
+      toast.success("QR Code régénéré. L'ancien code n'est plus valide.");
+    } catch (caughtError) {
+      toast.error(
+        caughtError instanceof Error ? caughtError.message : "Échec de la régénération."
+      );
+    } finally {
+      setIsRegenerating(false);
+    }
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -365,6 +388,58 @@ export default function CustomerDetails({ customerId }: CustomerDetailsProps) {
               </form>
             </div>
           </div>
+
+          {pass && !isWalletLoading && (
+            <>
+              <QRCodeCard
+                url={`${typeof window !== "undefined" ? window.location.origin : ""}/wallet/${pass.token}`}
+                fileName={`carte-${customer.first_name}-${customer.last_name}`}
+                onRegenerate={handleRegenerateToken}
+                isRegenerating={isRegenerating}
+              />
+
+              <div className="rounded-2xl border border-slate-200 bg-white p-5">
+                <h3 className="text-[14px] font-semibold tracking-tight text-slate-900">
+                  Statut Wallet
+                </h3>
+                <div className="mt-3 space-y-2 text-[12.5px] text-slate-600">
+                  <p className="flex items-center justify-between">
+                    <span>Apple Wallet</span>
+                    <span
+                      className={cn(
+                        "rounded-full px-2 py-0.5 text-[11px] font-medium",
+                        pass.apple_added_at
+                          ? "bg-emerald-50 text-emerald-600"
+                          : "bg-slate-100 text-slate-500"
+                      )}
+                    >
+                      {pass.apple_added_at ? "Ajoutée" : "Non ajoutée"}
+                    </span>
+                  </p>
+                  <p className="flex items-center justify-between">
+                    <span>Google Wallet</span>
+                    <span
+                      className={cn(
+                        "rounded-full px-2 py-0.5 text-[11px] font-medium",
+                        pass.google_added_at
+                          ? "bg-emerald-50 text-emerald-600"
+                          : "bg-slate-100 text-slate-500"
+                      )}
+                    >
+                      {pass.google_added_at ? "Ajoutée" : "Non ajoutée"}
+                    </span>
+                  </p>
+                </div>
+                <Link
+                  href={`/wallet/${pass.token}`}
+                  target="_blank"
+                  className="mt-4 block rounded-xl border border-slate-200 px-3 py-2 text-center text-[12.5px] font-medium text-slate-700 hover:bg-slate-50"
+                >
+                  Voir la carte du client
+                </Link>
+              </div>
+            </>
+          )}
         </div>
 
         <div className="rounded-2xl border border-slate-200 bg-white p-5 lg:col-span-2">
@@ -376,6 +451,7 @@ export default function CustomerDetails({ customerId }: CustomerDetailsProps) {
               visits={visits}
               rewards={rewards}
               programs={programs}
+              scans={scans}
               onCancelVisit={handleCancelVisit}
               onCancelReward={handleCancelReward}
               isMutating={isMutating}
