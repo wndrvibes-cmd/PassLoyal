@@ -31,9 +31,11 @@ export default function LoginForm() {
       }
 
       const profile = await getCurrentProfile(supabase).catch(() => null);
-      await supabase.rpc("log_audit_event", { p_action: "login" }).catch(() => {
+      try {
+        await supabase.rpc("log_audit_event", { p_action: "login" });
+      } catch {
         // Non-blocking: audit logging should never prevent sign-in.
-      });
+      }
 
       router.push(profile?.role === "super_admin" ? "/admin" : "/dashboard");
       router.refresh();
