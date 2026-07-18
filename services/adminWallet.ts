@@ -19,7 +19,7 @@ export async function getWalletOverview(supabase: SupabaseClient): Promise<Admin
 
   if (passesError) throw passesError;
 
-  const rows = (passes ?? []) as Array<{
+  const rows = (passes ?? []) as unknown as Array<{
     apple_added_at: string | null;
     google_added_at: string | null;
     customers: { is_active: boolean } | null;

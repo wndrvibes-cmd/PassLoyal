@@ -14,9 +14,9 @@ export async function listAllCustomers(supabase: SupabaseClient): Promise<Custom
 
   if (error) throw error;
 
-  return ((data ?? []) as Array<Customer & { merchants: { business_name: string } | null }>).map(
-    (row) => ({ ...row, merchant_business_name: row.merchants?.business_name ?? null })
-  );
+  return (
+    (data ?? []) as unknown as Array<Customer & { merchants: { business_name: string } | null }>
+  ).map((row) => ({ ...row, merchant_business_name: row.merchants?.business_name ?? null }));
 }
 
 export async function getCustomerWithMerchant(
@@ -32,7 +32,7 @@ export async function getCustomerWithMerchant(
   if (error) throw error;
   if (!data) return null;
 
-  const row = data as Customer & { merchants: { business_name: string } | null };
+  const row = data as unknown as Customer & { merchants: { business_name: string } | null };
   return { ...row, merchant_business_name: row.merchants?.business_name ?? null };
 }
 

@@ -15,7 +15,7 @@ export async function listMerchants(supabase: SupabaseClient): Promise<MerchantW
 
   if (error) throw error;
 
-  return ((data ?? []) as Array<
+  return ((data ?? []) as unknown as Array<
     Merchant & { customers: { count: number }[]; loyalty_programs: { count: number }[] }
   >).map((row) => ({
     ...row,

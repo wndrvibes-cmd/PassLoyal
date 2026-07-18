@@ -23,7 +23,9 @@ export async function listSubscriptions(
   if (error) throw error;
 
   return (
-    (data ?? []) as Array<Subscription & { merchants: { business_name: string; email: string | null } }>
+    (data ?? []) as unknown as Array<
+      Subscription & { merchants: { business_name: string; email: string | null } }
+    >
   ).map((row) => ({
     ...row,
     merchant_business_name: row.merchants.business_name,
