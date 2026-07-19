@@ -1,21 +1,63 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { site } from "@/lib/content/site";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "PassLoyal — La fidélité digitale pour commerçants modernes",
-    template: "%s · PassLoyal",
+    default: `${site.name} — ${site.tagline}`,
+    template: `%s · ${site.name}`,
   },
-  description:
-    "PassLoyal permet aux commerçants de créer des cartes de fidélité digitales compatibles Apple Wallet et Google Wallet, avec suivi des points, récompenses et tableau de bord en temps réel.",
-  metadataBase: new URL("https://passloyal.fr"),
+  description: site.description,
+  metadataBase: new URL(site.url),
+  keywords: [
+    "carte de fidélité digitale",
+    "Apple Wallet",
+    "Google Wallet",
+    "programme de fidélité commerçant",
+    "fidélisation client",
+    "carte de fidélité sans application",
+  ],
+  authors: [{ name: site.name }],
+  openGraph: {
+    title: `${site.name} — ${site.tagline}`,
+    description: site.description,
+    type: "website",
+    locale: "fr_FR",
+    siteName: site.name,
+    url: site.url,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} — ${site.tagline}`,
+    description: site.description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.name,
+  url: site.url,
+  description: site.description,
+  email: site.email,
+  telephone: site.phone,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.line1,
+    postalCode: site.address.postalCode,
+    addressLocality: site.address.city,
+    addressCountry: "FR",
+  },
+  sameAs: [site.social.linkedin, site.social.instagram, site.social.twitter],
 };
 
 export default function RootLayout({
@@ -24,8 +66,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={inter.variable}>
-      <body className="font-sans antialiased">{children}</body>
+    <html lang="fr" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -1,60 +1,36 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
-import Hero from "@/components/landing/Hero";
-import TrustedBrands from "@/components/landing/TrustedBrands";
-import HowItWorks from "@/components/landing/HowItWorks";
-import Features from "@/components/landing/Features";
-import Benefits from "@/components/landing/Benefits";
-import DashboardPreview from "@/components/landing/DashboardPreview";
-import Testimonials from "@/components/landing/Testimonials";
-import Pricing from "@/components/landing/Pricing";
-import FAQ from "@/components/landing/FAQ";
-import CTA from "@/components/landing/CTA";
-import Footer from "@/components/layout/Footer";
+
+import { Hero } from "@/components/home/Hero";
+import { LogoCloud } from "@/components/home/LogoCloud";
+import { HowItWorks } from "@/components/home/HowItWorks";
+import { WhyUs } from "@/components/home/WhyUs";
+import { FeatureGrid } from "@/components/home/FeatureGrid";
+import { StatsBand } from "@/components/home/StatsBand";
+import { Testimonials } from "@/components/home/Testimonials";
+import { PricingTeaser } from "@/components/home/PricingTeaser";
+import { FaqTeaser } from "@/components/home/FaqTeaser";
+import { CtaFinal } from "@/components/home/CtaFinal";
+import { site } from "@/lib/content/site";
 
 export const metadata: Metadata = {
-  title: "PassLoyal — La fidélité digitale pour commerçants modernes",
-  description:
-    "PassLoyal permet aux commerçants de créer des cartes de fidélité digitales compatibles Apple Wallet et Google Wallet, avec suivi des points, récompenses et tableau de bord en temps réel.",
-  keywords: [
-    "carte de fidélité digitale",
-    "Apple Wallet",
-    "Google Wallet",
-    "programme de fidélité",
-    "SaaS commerçants",
-    "fidélisation client",
-  ],
-  openGraph: {
-    title: "PassLoyal — La fidélité digitale pour commerçants modernes",
-    description:
-      "Remplacez vos cartes papier par des cartes Apple Wallet et Google Wallet. Points, récompenses et statistiques en temps réel.",
-    type: "website",
-    locale: "fr_FR",
-    siteName: "PassLoyal",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "PassLoyal — La fidélité digitale pour commerçants modernes",
-    description:
-      "Remplacez vos cartes papier par des cartes Apple Wallet et Google Wallet. Points, récompenses et statistiques en temps réel.",
-  },
+  title: `${site.name} — ${site.tagline}`,
+  description: site.description,
+  alternates: { canonical: "/" },
 };
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="min-h-screen bg-white">
-      <Navbar />
+    <>
       <Hero />
-      <TrustedBrands />
+      <LogoCloud />
       <HowItWorks />
-      <Features />
-      <Benefits />
-      <DashboardPreview />
+      <WhyUs />
+      <FeatureGrid />
+      <StatsBand />
       <Testimonials />
-      <Pricing />
-      <FAQ />
-      <CTA />
-      <Footer />
-    </main>
+      <PricingTeaser />
+      <FaqTeaser />
+      <CtaFinal />
+    </>
   );
 }
