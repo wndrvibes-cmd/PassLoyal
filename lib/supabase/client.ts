@@ -1,9 +1,10 @@
 import { createBrowserClient } from "@supabase/ssr";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-// Read directly at build time so a Vercel build-cache hit can't keep an
-// old NEXT_PUBLIC_SUPABASE_URL/ANON_KEY baked into a chunk whose source
-// otherwise didn't change.
+// Read directly at build time. Chapitre 6 note: Vercel env vars were
+// deleted and recreated (single entry each, Production scope) after the
+// project moved to qybyitxsehnckatjzdbl — this comment change forces a
+// fresh compile of this module so the current values get inlined.
 export const SUPABASE_URL: string = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
 export const SUPABASE_ANON_KEY: string = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
 
