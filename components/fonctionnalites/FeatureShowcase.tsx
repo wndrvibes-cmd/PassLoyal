@@ -10,6 +10,7 @@ export function FeatureShowcase({ features }: { features: Feature[] }) {
   return (
     <section className="bg-white py-4 sm:py-8">
       <Container className="flex flex-col gap-24 py-16 sm:gap-32">
+        <h2 className="sr-only">Apple Wallet et Google Wallet en détail</h2>
         {features.map((feature, index) => {
           const reversed = index % 2 === 1;
           const variant = feature.slug === "google-wallet" ? "google" : "apple";

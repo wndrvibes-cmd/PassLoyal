@@ -104,6 +104,21 @@ export const whyUsPoints: WhyUsPoint[] = [
   },
 ];
 
+export type ComparisonRow = {
+  label: string;
+  paper: string | boolean;
+  passloyal: string | boolean;
+};
+
+export const paperComparison: ComparisonRow[] = [
+  { label: "Support de la carte", paper: "Papier, se perd ou s'oublie", passloyal: "Apple Wallet & Google Wallet, toujours dans la poche" },
+  { label: "Mise à jour du solde", paper: "Tamponnée à la main, erreurs possibles", passloyal: "Automatique et en temps réel" },
+  { label: "Relance des clients", paper: false, passloyal: "Notifications push ciblées" },
+  { label: "Statistiques d'usage", paper: false, passloyal: "Tableau de bord en temps réel" },
+  { label: "Personnalisation de marque", paper: "Impression limitée", passloyal: "Couleurs, logo et récompenses sur mesure" },
+  { label: "Coût récurrent", paper: "Réimpression à chaque rupture de stock", passloyal: "Un abonnement, aucune impression" },
+];
+
 export const trustedLogos: string[] = [
   "Café Lumière",
   "Boulangerie Ferrand",

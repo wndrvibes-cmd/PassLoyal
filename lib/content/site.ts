@@ -33,6 +33,7 @@ export const site = {
 export const mainNav = [
   { label: "Fonctionnalités", href: "/fonctionnalites" },
   { label: "Tarifs", href: "/tarifs" },
+  { label: "FAQ", href: "/faq" },
   { label: "À propos", href: "/a-propos" },
   { label: "Contact", href: "/contact" },
 ] as const;
@@ -41,7 +42,7 @@ export const footerNav = {
   produit: [
     { label: "Fonctionnalités", href: "/fonctionnalites" },
     { label: "Tarifs", href: "/tarifs" },
-    { label: "FAQ", href: "/tarifs#faq" },
+    { label: "FAQ", href: "/faq" },
   ],
   entreprise: [
     { label: "À propos", href: "/a-propos" },

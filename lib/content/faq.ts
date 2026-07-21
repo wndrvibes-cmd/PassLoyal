@@ -54,6 +54,29 @@ export const contactFaq: FaqItem[] = [
   },
 ];
 
+export const securityFaq: FaqItem[] = [
+  {
+    question: "Où sont hébergées les données de mes clients ?",
+    answer:
+      "Toutes les données sont hébergées en Europe, chiffrées en transit et au repos, conformément aux exigences du RGPD.",
+  },
+  {
+    question: "PassLoyal revend-il les données de mes clients ?",
+    answer:
+      "Non. Les données collectées via votre programme de fidélité vous appartiennent et ne sont ni revendues ni partagées avec des tiers à des fins commerciales.",
+  },
+  {
+    question: "Que se passe-t-il si je résilie mon abonnement ?",
+    answer:
+      "Vous pouvez exporter l'intégralité de vos données clients avant résiliation. Les cartes déjà installées dans le Wallet de vos clients cessent simplement de se mettre à jour.",
+  },
+  {
+    question: "Le QR code de chaque carte peut-il être falsifié ?",
+    answer:
+      "Non. Chaque QR code est chiffré et à usage contrôlé, ce qui empêche toute duplication ou falsification lors du scan en caisse.",
+  },
+];
+
 export const pricingFaq: FaqItem[] = [
   {
     question: "Puis-je changer d'offre à tout moment ?",

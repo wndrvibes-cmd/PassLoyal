@@ -39,7 +39,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# supabase
-supabase/.branches
-supabase/.temp
+# claude code
 .claude/settings.local.json

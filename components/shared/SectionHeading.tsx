@@ -8,6 +8,7 @@ export function SectionHeading({
   description,
   align = "center",
   tone = "light",
+  as = "h2",
   className,
 }: {
   eyebrow?: string;
@@ -15,8 +16,11 @@ export function SectionHeading({
   description?: React.ReactNode;
   align?: "center" | "left";
   tone?: "light" | "dark";
+  as?: "h1" | "h2";
   className?: string;
 }) {
+  const Heading = as;
+
   return (
     <RevealOnScroll
       className={cn(
@@ -28,14 +32,14 @@ export function SectionHeading({
       {eyebrow ? (
         <Badge variant={tone === "dark" ? "outline-light" : "default"}>{eyebrow}</Badge>
       ) : null}
-      <h2
+      <Heading
         className={cn(
           "text-balance text-3xl font-semibold tracking-tight sm:text-4xl lg:text-[2.75rem]",
           tone === "dark" ? "text-white" : "text-foreground"
         )}
       >
         {title}
-      </h2>
+      </Heading>
       {description ? (
         <p
           className={cn(
