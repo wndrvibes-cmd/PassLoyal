@@ -40,6 +40,10 @@ export const metadata: Metadata = {
   },
 };
 
+const sameAs = [site.social.linkedin, site.social.instagram, site.social.twitter].filter(
+  (url): url is string => Boolean(url)
+);
+
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -47,15 +51,19 @@ const organizationJsonLd = {
   url: site.url,
   description: site.description,
   email: site.email,
-  telephone: site.phone,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: site.address.line1,
-    postalCode: site.address.postalCode,
-    addressLocality: site.address.city,
-    addressCountry: "FR",
-  },
-  sameAs: [site.social.linkedin, site.social.instagram, site.social.twitter],
+  ...(site.phone ? { telephone: site.phone } : {}),
+  ...(site.address
+    ? {
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: site.address.line1,
+          postalCode: site.address.postalCode,
+          addressLocality: site.address.city,
+          addressCountry: "FR",
+        },
+      }
+    : {}),
+  ...(sameAs.length ? { sameAs } : {}),
 };
 
 export default function RootLayout({

@@ -1,5 +1,6 @@
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { AmbientGlow } from "@/components/shared/AmbientGlow";
 
 export function PageHero({
   eyebrow,
@@ -13,7 +14,7 @@ export function PageHero({
   return (
     <section className="relative overflow-hidden bg-ink py-24 sm:py-28">
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-30" />
-      <div className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-primary-600/25 blur-[120px]" />
+      <AmbientGlow variant="page" />
 
       <Container className="relative">
         <SectionHeading eyebrow={eyebrow} title={title} description={description} tone="dark" as="h1" />

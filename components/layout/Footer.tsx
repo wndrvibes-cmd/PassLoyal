@@ -7,6 +7,7 @@ import { site, footerNav } from "@/lib/content/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const hasSocial = site.social.linkedin || site.social.instagram || site.social.twitter;
 
   return (
     <footer className="border-t border-border bg-secondary/40">
@@ -17,35 +18,43 @@ export function Footer() {
             <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
               {site.description}
             </p>
-            <div className="flex items-center gap-3 pt-1">
-              <a
-                href={site.social.linkedin}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label="LinkedIn"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
-              >
-                <Linkedin className="h-4 w-4" />
-              </a>
-              <a
-                href={site.social.instagram}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label="Instagram"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
-              >
-                <Instagram className="h-4 w-4" />
-              </a>
-              <a
-                href={site.social.twitter}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label="Twitter / X"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
-              >
-                <Twitter className="h-4 w-4" />
-              </a>
-            </div>
+            {hasSocial ? (
+              <div className="flex items-center gap-3 pt-1">
+                {site.social.linkedin ? (
+                  <a
+                    href={site.social.linkedin}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label="LinkedIn"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
+                  >
+                    <Linkedin className="h-4 w-4" />
+                  </a>
+                ) : null}
+                {site.social.instagram ? (
+                  <a
+                    href={site.social.instagram}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label="Instagram"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
+                  >
+                    <Instagram className="h-4 w-4" />
+                  </a>
+                ) : null}
+                {site.social.twitter ? (
+                  <a
+                    href={site.social.twitter}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label="Twitter / X"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
+                  >
+                    <Twitter className="h-4 w-4" />
+                  </a>
+                ) : null}
+              </div>
+            ) : null}
           </div>
 
           <div className="lg:col-span-2">
@@ -98,21 +107,25 @@ export function Footer() {
                   {site.email}
                 </a>
               </li>
-              <li>
-                <a
-                  href={`tel:${site.phone.replace(/\s/g, "")}`}
-                  className="flex items-center gap-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  <Phone className="h-4 w-4 shrink-0" />
-                  {site.phone}
-                </a>
-              </li>
-              <li className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                <span>
-                  {site.address.line1}, {site.address.postalCode} {site.address.city}
-                </span>
-              </li>
+              {site.phone ? (
+                <li>
+                  <a
+                    href={`tel:${site.phone.replace(/\s/g, "")}`}
+                    className="flex items-center gap-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    <Phone className="h-4 w-4 shrink-0" />
+                    {site.phone}
+                  </a>
+                </li>
+              ) : null}
+              {site.address ? (
+                <li className="flex items-start gap-2.5 text-sm text-muted-foreground">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
+                  <span>
+                    {site.address.line1}, {site.address.postalCode} {site.address.city}
+                  </span>
+                </li>
+              ) : null}
             </ul>
           </div>
         </div>

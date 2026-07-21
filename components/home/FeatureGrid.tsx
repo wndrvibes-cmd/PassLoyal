@@ -11,10 +11,10 @@ export function FeatureGrid() {
   const shown = features.slice(0, 6);
 
   return (
-    <section className="bg-white py-24 sm:py-32">
+    <section className="bg-secondary/40 py-24 sm:py-32">
       <Container>
         <SectionHeading
-          eyebrow="Fonctionnalités"
+          eyebrow="La solution PassLoyal"
           title="Tout ce qu'il faut pour fidéliser, rien de superflu"
           description="Une plateforme complète pensée pour les commerces physiques — de l'ajout de la carte au suivi de vos performances."
         />

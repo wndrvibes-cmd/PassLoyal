@@ -6,7 +6,6 @@ import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { ContactInfo } from "@/components/contact/ContactInfo";
 import { ContactFaq } from "@/components/contact/ContactFaq";
-import { MapEmbed } from "@/components/contact/MapEmbed";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -32,7 +31,6 @@ export default function ContactPage() {
 
           <RevealOnScroll delay={0.1} className="flex flex-col gap-8">
             <ContactInfo />
-            <MapEmbed />
             <ContactFaq />
           </RevealOnScroll>
         </Container>

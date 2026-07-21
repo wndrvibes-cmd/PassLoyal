@@ -9,25 +9,29 @@ const items = [
     value: site.email,
     href: `mailto:${site.email}`,
   },
-  {
-    icon: Phone,
-    label: "Téléphone",
-    value: site.phone,
-    href: `tel:${site.phone.replace(/\s/g, "")}`,
-  },
-  {
-    icon: MapPin,
-    label: "Adresse",
-    value: `${site.address.line1}, ${site.address.postalCode} ${site.address.city}`,
-    href: undefined,
-  },
+  site.phone
+    ? {
+        icon: Phone,
+        label: "Téléphone",
+        value: site.phone,
+        href: `tel:${site.phone.replace(/\s/g, "")}`,
+      }
+    : null,
+  site.address
+    ? {
+        icon: MapPin,
+        label: "Adresse",
+        value: `${site.address.line1}, ${site.address.postalCode} ${site.address.city}`,
+        href: undefined,
+      }
+    : null,
   {
     icon: Clock,
-    label: "Horaires",
-    value: "Du lundi au vendredi, 9h – 18h",
+    label: "Délai de réponse",
+    value: "Sous 24h ouvrées",
     href: undefined,
   },
-];
+].filter((item): item is NonNullable<typeof item> => item !== null);
 
 export function ContactInfo() {
   return (

@@ -25,6 +25,7 @@ export const pricingPlans: PricingPlan[] = [
       "Jusqu'à 500 cartes actives",
       "Apple Wallet et Google Wallet",
       "QR code de validation en caisse",
+      "50 notifications push par mois",
       "Statistiques essentielles",
       "Support par e-mail",
     ],

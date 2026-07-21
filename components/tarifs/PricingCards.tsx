@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, Store, ShieldCheck } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/shared/Container";
@@ -7,6 +7,48 @@ import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { pricingPlans } from "@/lib/content/pricing";
+
+function PlanVisual({ id, highlighted }: { id: string; highlighted: boolean }) {
+  const tone = highlighted ? "bg-white/10" : "bg-primary/10";
+  const mark = highlighted ? "bg-white/25" : "bg-primary/25";
+
+  if (id === "pro") {
+    return (
+      <div className={cn("flex h-11 items-center", tone, "w-fit rounded-xl px-3")}>
+        <div className="flex -space-x-2">
+          {[0, 1, 2].map((i) => (
+            <span
+              key={i}
+              className={cn(
+                "h-6 w-6 rounded-full ring-2",
+                highlighted ? "ring-ink" : "ring-white",
+                mark
+              )}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (id === "enterprise") {
+    return (
+      <div className={cn("flex h-11 items-center gap-1.5", tone, "w-fit rounded-xl px-3")}>
+        {[0, 1, 2].map((i) => (
+          <span key={i} className={cn("flex h-6 w-6 items-center justify-center rounded-md", mark)}>
+            <Store className="h-3 w-3" />
+          </span>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <span className={cn("flex h-11 w-11 items-center justify-center rounded-xl", tone)}>
+      <Store className="h-5 w-5" strokeWidth={2.25} />
+    </span>
+  );
+}
 
 export function PricingCards() {
   return (
@@ -29,7 +71,9 @@ export function PricingCards() {
                   </Badge>
                 ) : null}
 
-                <h3 className="text-lg font-semibold tracking-tight">{plan.name}</h3>
+                <PlanVisual id={plan.id} highlighted={plan.highlighted} />
+
+                <h3 className="mt-4 text-lg font-semibold tracking-tight">{plan.name}</h3>
                 <p
                   className={cn(
                     "mt-2 text-sm",
@@ -49,6 +93,15 @@ export function PricingCards() {
                     {plan.period}
                   </span>
                 </div>
+                <p
+                  className={cn(
+                    "mt-2 flex items-center gap-1.5 text-xs",
+                    plan.highlighted ? "text-ink-muted" : "text-muted-foreground"
+                  )}
+                >
+                  <ShieldCheck className="h-3.5 w-3.5" />
+                  {plan.id === "enterprise" ? "Conditions établies avec notre équipe" : "Sans engagement"}
+                </p>
 
                 <Button
                   asChild

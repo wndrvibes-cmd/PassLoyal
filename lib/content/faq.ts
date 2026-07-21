@@ -32,7 +32,7 @@ export const generalFaq: FaqItem[] = [
   {
     question: "Combien de temps prend la mise en place ?",
     answer:
-      "La plupart des commerçants publient leur première carte en moins de quinze minutes. Notre équipe reste disponible pour vous accompagner si besoin.",
+      "La création de votre première carte est pensée pour prendre moins de quinze minutes. Notre équipe reste disponible pour vous accompagner si besoin.",
   },
 ];
 
@@ -54,26 +54,30 @@ export const contactFaq: FaqItem[] = [
   },
 ];
 
+// PassLoyal is pre-launch: these answers describe our commitments and
+// design intentions, not operational claims about an existing system —
+// deliberately phrased so no answer implies a live backend or real data
+// processing exists today.
 export const securityFaq: FaqItem[] = [
   {
-    question: "Où sont hébergées les données de mes clients ?",
+    question: "Où seront hébergées les données de mes clients ?",
     answer:
-      "Toutes les données sont hébergées en Europe, chiffrées en transit et au repos, conformément aux exigences du RGPD.",
+      "PassLoyal est actuellement en construction. Notre engagement : une conformité RGPD complète et un hébergement sécurisé. Les détails techniques précis (hébergeur, chiffrement) seront documentés avant l'ouverture commerciale du service.",
   },
   {
-    question: "PassLoyal revend-il les données de mes clients ?",
+    question: "PassLoyal revendra-t-il les données de mes clients ?",
     answer:
-      "Non. Les données collectées via votre programme de fidélité vous appartiennent et ne sont ni revendues ni partagées avec des tiers à des fins commerciales.",
+      "Non — et cela ne changera pas. Les données de votre programme de fidélité vous appartiennent et ne seront jamais revendues ni partagées à des fins commerciales.",
   },
   {
-    question: "Que se passe-t-il si je résilie mon abonnement ?",
+    question: "Que se passera-t-il si je résilie mon abonnement ?",
     answer:
-      "Vous pouvez exporter l'intégralité de vos données clients avant résiliation. Les cartes déjà installées dans le Wallet de vos clients cessent simplement de se mettre à jour.",
+      "Vous pourrez exporter l'intégralité de vos données clients avant résiliation. Les cartes déjà installées dans le Wallet de vos clients cesseront simplement de se mettre à jour.",
   },
   {
-    question: "Le QR code de chaque carte peut-il être falsifié ?",
+    question: "Le QR code de chaque carte pourra-t-il être falsifié ?",
     answer:
-      "Non. Chaque QR code est chiffré et à usage contrôlé, ce qui empêche toute duplication ou falsification lors du scan en caisse.",
+      "Non : chaque QR code sera conçu pour un usage contrôlé et non duplicable, afin d'empêcher toute falsification lors du scan en caisse.",
   },
 ];
 

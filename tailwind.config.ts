@@ -62,6 +62,19 @@ const config: Config = {
           foreground: "hsl(var(--ink-foreground))",
           muted: "hsl(var(--ink-muted))",
         },
+        // PassLoyal signature accent — reserved for reward/points/loyalty
+        // moments (QR highlights, points chips, badge dots). Used sparingly
+        // as a second brand color alongside primary indigo, never as a base.
+        gold: {
+          50: "#fdf8ec",
+          100: "#faecc7",
+          200: "#f4d888",
+          300: "#edc158",
+          400: "#e2a934",
+          500: "#c98a20",
+          600: "#a56c19",
+          700: "#7e5117",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -84,22 +97,6 @@ const config: Config = {
           "linear-gradient(to right, hsl(var(--border) / 0.6) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border) / 0.6) 1px, transparent 1px)",
       },
       keyframes: {
-        marquee: {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
-        "fade-in-up": {
-          "0%": { opacity: "0", transform: "translateY(12px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -110,12 +107,8 @@ const config: Config = {
         },
       },
       animation: {
-        marquee: "marquee 32s linear infinite",
-        "fade-in-up": "fade-in-up 0.6s ease-out both",
-        float: "float 6s ease-in-out infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        shimmer: "shimmer 2.5s linear infinite",
       },
     },
   },

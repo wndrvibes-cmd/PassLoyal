@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { PageHero } from "@/components/shared/PageHero";
 import { PricingCards } from "@/components/tarifs/PricingCards";
+import { WhichPlan } from "@/components/tarifs/WhichPlan";
 import { ComparisonTable } from "@/components/tarifs/ComparisonTable";
 import { PricingFaq } from "@/components/tarifs/PricingFaq";
 import { CtaFinal } from "@/components/home/CtaFinal";
@@ -22,6 +23,7 @@ export default function TarifsPage() {
         description="Sans engagement, sans frais cachés. Changez d'offre à tout moment selon vos besoins."
       />
       <PricingCards />
+      <WhichPlan />
       <ComparisonTable />
       <PricingFaq />
       <CtaFinal />

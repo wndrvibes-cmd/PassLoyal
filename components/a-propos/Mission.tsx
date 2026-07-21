@@ -1,11 +1,12 @@
 import { Container } from "@/components/shared/Container";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
+import { AmbientGlow } from "@/components/shared/AmbientGlow";
 
 export function Mission() {
   return (
     <section className="relative overflow-hidden bg-ink py-24 sm:py-28">
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-30" />
-      <div className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-primary-600/25 blur-[120px]" />
+      <AmbientGlow variant="side" />
 
       <Container className="relative">
         <RevealOnScroll className="mx-auto max-w-3xl text-center">

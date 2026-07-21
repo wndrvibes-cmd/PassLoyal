@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 
 import { PageHero } from "@/components/shared/PageHero";
-import { FeatureShowcase } from "@/components/fonctionnalites/FeatureShowcase";
-import { FeatureListGrid } from "@/components/fonctionnalites/FeatureListGrid";
+import { FeatureTour } from "@/components/fonctionnalites/FeatureTour";
 import { CtaFinal } from "@/components/home/CtaFinal";
-import { features } from "@/lib/content/features";
 
 export const metadata: Metadata = {
   title: "Fonctionnalités",
@@ -14,9 +12,6 @@ export const metadata: Metadata = {
 };
 
 export default function FonctionnalitesPage() {
-  const showcased = features.filter((f) => f.slug === "apple-wallet" || f.slug === "google-wallet");
-  const rest = features.filter((f) => f.slug !== "apple-wallet" && f.slug !== "google-wallet");
-
   return (
     <>
       <PageHero
@@ -24,8 +19,7 @@ export default function FonctionnalitesPage() {
         title="Une plateforme de fidélité complète, du Wallet aux statistiques"
         description="Chaque fonctionnalité de PassLoyal existe pour une seule raison : simplifier la fidélisation, pour vous comme pour vos clients."
       />
-      <FeatureShowcase features={showcased} />
-      <FeatureListGrid features={rest} />
+      <FeatureTour />
       <CtaFinal />
     </>
   );

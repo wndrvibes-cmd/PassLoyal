@@ -18,7 +18,7 @@ npm run dev
 
 Ouvre [http://localhost:3000](http://localhost:3000).
 
-Aucune variable d'environnement n'est requise pour faire tourner le site vitrine.
+Aucune variable d'environnement n'est requise pour faire tourner le site vitrine en local. En production, définis `NEXT_PUBLIC_SITE_URL` (ex. `https://passloyal.fr`) dès qu'un vrai domaine est actif — sans cette variable, le site retombe sur l'URL de déploiement Vercel puis sur `localhost`, jamais sur un domaine deviné (voir `lib/content/site.ts`).
 
 ## Structure
 
@@ -45,10 +45,10 @@ components/
   home/                      Sections de la page d'accueil
   fonctionnalites/, tarifs/, a-propos/, contact/, faq/   Sections propres à chaque page vitrine
   shared/                    Container, SectionHeading, RevealOnScroll, PhoneMockup, PageHero, LegalLayout
-  ui/                        Design system shadcn/ui — primitives à plat (button, card, badge, accordion, tabs, input, textarea, label) + sous-dossiers réservés pour les futures catégories (tables, charts, dialogs, forms, animations, icons), voir components/ui/README.md
+  ui/                        Design system shadcn/ui — primitives à plat (button, badge, accordion, tabs, input, textarea, label) + sous-dossiers réservés pour les futures catégories (tables, charts, dialogs, forms, animations, icons), voir components/ui/README.md
 
 lib/
-  content/                   Contenu du site vitrine, typé (site, features, pricing, testimonials, faq, misc, caseStudies)
+  content/                   Contenu du site vitrine, typé (site, features, pricing, faq, misc, sectors) — aucune fausse preuve sociale : pas de témoignages ni de logos clients tant qu'ils ne sont pas réels
   utils.ts                   Helper cn()
 
 hooks/                       Réservé pour les hooks React de la future application SaaS — vide
@@ -56,12 +56,16 @@ types/                       Réservé pour les types partagés de la future app
 services/                    Réservé pour l'intégration Auth/Stripe/Supabase/Wallet/Webhooks/etc. — vide, voir services/README.md
 ```
 
-## Contenu à personnaliser
+## Contenu à personnaliser avant mise en production
 
-Tout le contenu texte du site vitrine (coordonnées, tarifs, témoignages, mentions légales) vit dans `lib/content/*.ts` et utilise volontairement des valeurs plausibles à remplacer :
+Tout le contenu texte du site vitrine vit dans `lib/content/*.ts`.
 
-- `lib/content/site.ts` — nom, adresse, e-mail, téléphone, réseaux sociaux, informations légales (SIRET, RCS…)
-- `lib/content/pricing.ts` — grille tarifaire Starter / Pro / Enterprise
+`lib/content/site.ts` marque explicitement (commentaires `TODO`) tout ce qui reste un **placeholder à remplacer par de vraies informations** — jamais un faux numéro plausible, un champ vide ou masqué le temps qu'une vraie valeur existe :
+
+- `phone`, `address`, `social.*` — vides tant qu'aucune vraie valeur n'existe ; les composants (`Footer`, `ContactInfo`, JSON-LD) masquent automatiquement ce qui n'est pas renseigné plutôt que d'afficher un faux numéro/adresse
+- `legal.*` (SIRET, RCS, capital, raison sociale) — littéralement `"[À compléter]"` sur les pages légales tant que l'entreprise n'est pas immatriculée
+- `email` — à remplacer par une vraie boîte surveillée avant lancement (le domaine `passloyal.fr` ne résout pas encore)
+- `lib/content/pricing.ts` — grille tarifaire Starter / Pro / Enterprise (prix actuels conservés tels quels, ne pas modifier sans validation)
 - `app/(marketing)/legal/**` — mentions légales, CGU, confidentialité, cookies (contenu indicatif, à faire valider par un professionnel du droit)
 
 ## Prochaine étape : l'application SaaS

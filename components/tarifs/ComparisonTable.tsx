@@ -5,7 +5,7 @@ import { pricingComparison } from "@/lib/content/pricing";
 
 export function ComparisonTable() {
   return (
-    <section className="bg-secondary/40 py-24 sm:py-32">
+    <section className="bg-white py-24 sm:py-32">
       <Container>
         <SectionHeading
           eyebrow="Comparatif"

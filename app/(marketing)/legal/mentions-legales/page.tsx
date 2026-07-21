@@ -20,12 +20,17 @@ export default function MentionsLegalesPage() {
           société immatriculée au {site.legal.rcs}, au capital social de {site.legal.capital},
           dont le numéro SIRET est {site.legal.siret}.
         </p>
+        {site.address ? (
+          <p>
+            Siège social : {site.address.line1}, {site.address.postalCode} {site.address.city},{" "}
+            {site.address.country}.
+          </p>
+        ) : (
+          <p>Siège social : [adresse à compléter].</p>
+        )}
         <p>
-          Siège social : {site.address.line1}, {site.address.postalCode} {site.address.city},{" "}
-          {site.address.country}.
-        </p>
-        <p>
-          Contact : <a href={`mailto:${site.email}`}>{site.email}</a> — {site.phone}
+          Contact : <a href={`mailto:${site.email}`}>{site.email}</a>
+          {site.phone ? ` — ${site.phone}` : null}
         </p>
         <p>{site.legal.directeurPublication}.</p>
       </section>

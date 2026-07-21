@@ -19,8 +19,8 @@ export default function AProposPage() {
     <>
       <PageHero
         eyebrow="À propos"
-        title="Nous construisons la référence française de la fidélité digitale"
-        description="Une petite équipe, une conviction simple : la fidélisation client ne devrait jamais être une contrainte."
+        title="Construisons ensemble la nouvelle génération de fidélité locale"
+        description="PassLoyal est actuellement en phase de lancement — une conviction simple nous guide : la fidélisation client ne devrait jamais être une contrainte."
       />
       <Story />
       <Mission />

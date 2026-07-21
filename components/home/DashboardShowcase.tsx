@@ -16,9 +16,9 @@ const statCards = [
 const chartBars = [38, 52, 46, 64, 58, 74, 69, 86, 78, 94, 88, 100];
 
 const activity = [
-  { name: "Camille B.", action: "a échangé une récompense", time: "il y a 4 min" },
-  { name: "Yanis F.", action: "a ajouté sa carte au Wallet", time: "il y a 12 min" },
-  { name: "Sarah N.", action: "a franchi 500 points", time: "il y a 26 min" },
+  { id: "#4821", action: "a échangé une récompense", time: "il y a 4 min" },
+  { id: "#2290", action: "a ajouté sa carte au Wallet", time: "il y a 12 min" },
+  { id: "#3157", action: "a franchi 500 points", time: "il y a 26 min" },
 ];
 
 export function DashboardShowcase() {
@@ -29,8 +29,8 @@ export function DashboardShowcase() {
       <Container>
         <SectionHeading
           eyebrow="Tableau de bord"
-          title="Votre activité de fidélisation, en un coup d'œil"
-          description="Un aperçu illustratif du tableau de bord PassLoyal — pensé pour répondre en un regard à la seule question qui compte : est-ce que mes clients reviennent ?"
+          title="Découvrez l'espace commerçant en avant-première"
+          description="Une maquette de l'espace de pilotage PassLoyal, avec des données de démonstration — pensée pour répondre en un regard à la seule question qui compte : est-ce que mes clients reviennent ?"
         />
 
         <RevealOnScroll delay={0.1} className="mt-16">
@@ -42,10 +42,13 @@ export function DashboardShowcase() {
               <span className="ml-3 rounded-full bg-white px-3 py-1 text-xs text-muted-foreground shadow-sm">
                 app.passloyal.fr/tableau-de-bord
               </span>
+              <span className="ml-auto rounded-full bg-gold-100 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-gold-700">
+                Aperçu · données de démonstration
+              </span>
             </div>
 
             <div className="p-6 sm:p-8">
-              <div className="grid gap-4 sm:grid-cols-3">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {statCards.map((stat) => (
                   <div key={stat.label} className="rounded-2xl border border-border p-5">
                     <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -61,6 +64,23 @@ export function DashboardShowcase() {
                     </p>
                   </div>
                 ))}
+
+                <div className="rounded-2xl border border-border p-5">
+                  <div
+                    className="relative flex h-14 w-14 items-center justify-center rounded-full"
+                    style={{
+                      background: `conic-gradient(hsl(var(--primary)) 0% 68%, hsl(var(--secondary)) 68% 100%)`,
+                    }}
+                  >
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-xs font-semibold text-primary">
+                      68%
+                    </div>
+                  </div>
+                  <p className="mt-4 text-xs text-muted-foreground">Taux de retour</p>
+                  <p className="mt-2 text-xs font-medium text-muted-foreground">
+                    Clients revenus sous 30 jours
+                  </p>
+                </div>
               </div>
 
               <div className="mt-6 grid gap-4 lg:grid-cols-[1.4fr_1fr]">
@@ -88,9 +108,10 @@ export function DashboardShowcase() {
                   <p className="text-sm font-medium text-foreground">Activité récente</p>
                   <ul className="mt-4 flex flex-col gap-4">
                     {activity.map((row) => (
-                      <li key={row.name} className="flex flex-col gap-0.5">
+                      <li key={row.id} className="flex flex-col gap-0.5">
                         <p className="text-sm text-foreground/85">
-                          <span className="font-medium">{row.name}</span> {row.action}
+                          <span className="font-mono text-xs text-muted-foreground">{row.id}</span>{" "}
+                          {row.action}
                         </p>
                         <p className="text-xs text-muted-foreground">{row.time}</p>
                       </li>

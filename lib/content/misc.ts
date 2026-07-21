@@ -1,18 +1,22 @@
-export type Stat = {
-  value: string;
-  suffix?: string;
+// No usage/customer-count stats are shown anywhere on the site: PassLoyal is
+// pre-launch and there are no real, verifiable numbers yet. These reassurance
+// points replace fabricated metrics with honest, factually-true-by-design
+// product properties instead.
+export type ReassurancePoint = {
+  icon: "wallet" | "smartphone" | "qr-code" | "shield-check";
   label: string;
 };
 
-export const stats: Stat[] = [
-  { value: "1200", suffix: "+", label: "commerçants équipés" },
-  { value: "3.4", suffix: "M", label: "cartes Wallet actives" },
-  { value: "38", suffix: "%", label: "de visites en plus en moyenne" },
-  { value: "15", suffix: " min", label: "pour lancer votre programme" },
+export const reassurancePoints: ReassurancePoint[] = [
+  { icon: "wallet", label: "Apple Wallet & Google Wallet" },
+  { icon: "smartphone", label: "Aucune application à télécharger" },
+  { icon: "qr-code", label: "Ajout de la carte en un scan" },
+  { icon: "shield-check", label: "Accompagnement à la mise en place" },
 ];
 
 export type Step = {
   number: string;
+  visual: "scan" | "add" | "return";
   title: string;
   description: string;
 };
@@ -20,21 +24,21 @@ export type Step = {
 export const howItWorksSteps: Step[] = [
   {
     number: "01",
-    title: "Créez votre carte",
-    description:
-      "Personnalisez votre carte de fidélité avec votre logo, vos couleurs et vos règles de points en quelques minutes, sans compétence technique.",
+    visual: "scan",
+    title: "Le client scanne",
+    description: "Un QR code affiché en caisse, en vitrine ou sur le ticket de caisse suffit.",
   },
   {
     number: "02",
-    title: "Partagez le QR code",
-    description:
-      "Affichez votre QR code en caisse, sur votre vitrine ou envoyez-le par SMS. Vos clients l'ajoutent à leur Wallet en un tap.",
+    visual: "add",
+    title: "Il ajoute sa carte",
+    description: "En un tap, la carte rejoint Apple Wallet ou Google Wallet — aucune app à installer.",
   },
   {
     number: "03",
-    title: "Fidélisez au quotidien",
-    description:
-      "Chaque passage en caisse crédite des points, déclenche des récompenses et alimente vos statistiques en temps réel.",
+    visual: "return",
+    title: "Il revient et fidélise",
+    description: "Points, récompenses et notifications le rappellent à chaque visite.",
   },
 ];
 
@@ -117,15 +121,4 @@ export const paperComparison: ComparisonRow[] = [
   { label: "Statistiques d'usage", paper: false, passloyal: "Tableau de bord en temps réel" },
   { label: "Personnalisation de marque", paper: "Impression limitée", passloyal: "Couleurs, logo et récompenses sur mesure" },
   { label: "Coût récurrent", paper: "Réimpression à chaque rupture de stock", passloyal: "Un abonnement, aucune impression" },
-];
-
-export const trustedLogos: string[] = [
-  "Café Lumière",
-  "Boulangerie Ferrand",
-  "Studio Bloom",
-  "Maison Lefèvre",
-  "Atelier Dubreuil",
-  "Épicerie Haddad",
-  "Salon Verdier",
-  "Librairie Nomade",
 ];

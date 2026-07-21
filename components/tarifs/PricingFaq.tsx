@@ -11,7 +11,7 @@ import { pricingFaq } from "@/lib/content/faq";
 
 export function PricingFaq() {
   return (
-    <section id="faq" className="scroll-mt-24 bg-white py-24 sm:py-32">
+    <section id="faq" className="scroll-mt-24 bg-secondary/40 py-24 sm:py-32">
       <Container className="max-w-3xl">
         <SectionHeading
           eyebrow="FAQ tarifs"
