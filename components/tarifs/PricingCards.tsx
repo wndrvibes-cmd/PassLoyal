@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Check, ArrowRight, Store, ShieldCheck } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -14,7 +17,11 @@ function PlanVisual({ id, highlighted }: { id: string; highlighted: boolean }) {
 
   if (id === "pro") {
     return (
-      <div className={cn("flex h-11 items-center", tone, "w-fit rounded-xl px-3")}>
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.2 }}
+        className={cn("flex h-11 items-center", tone, "w-fit rounded-xl px-3")}
+      >
         <div className="flex -space-x-2">
           {[0, 1, 2].map((i) => (
             <span
@@ -27,26 +34,34 @@ function PlanVisual({ id, highlighted }: { id: string; highlighted: boolean }) {
             />
           ))}
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   if (id === "enterprise") {
     return (
-      <div className={cn("flex h-11 items-center gap-1.5", tone, "w-fit rounded-xl px-3")}>
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.2 }}
+        className={cn("flex h-11 items-center gap-1.5", tone, "w-fit rounded-xl px-3")}
+      >
         {[0, 1, 2].map((i) => (
           <span key={i} className={cn("flex h-6 w-6 items-center justify-center rounded-md", mark)}>
             <Store className="h-3 w-3" />
           </span>
         ))}
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <span className={cn("flex h-11 w-11 items-center justify-center rounded-xl", tone)}>
+    <motion.span
+      whileHover={{ scale: 1.08, rotate: -4 }}
+      transition={{ duration: 0.2 }}
+      className={cn("flex h-11 w-11 items-center justify-center rounded-xl", tone)}
+    >
       <Store className="h-5 w-5" strokeWidth={2.25} />
-    </span>
+    </motion.span>
   );
 }
 
@@ -59,10 +74,10 @@ export function PricingCards() {
             <RevealOnScroll key={plan.id} delay={index * 0.08}>
               <div
                 className={cn(
-                  "relative flex h-full flex-col rounded-3xl border p-8",
+                  "relative flex h-full flex-col rounded-3xl border p-8 transition-shadow duration-300",
                   plan.highlighted
                     ? "border-primary/30 bg-ink text-white shadow-soft-xl lg:-translate-y-4"
-                    : "border-border bg-white shadow-soft"
+                    : "border-border bg-white shadow-soft hover:shadow-soft-lg"
                 )}
               >
                 {plan.highlighted ? (

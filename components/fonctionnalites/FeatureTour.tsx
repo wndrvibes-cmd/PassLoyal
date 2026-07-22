@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Container } from "@/components/shared/Container";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { PhoneMockup } from "@/components/shared/PhoneMockup";
+import { TiltCard } from "@/components/shared/TiltCard";
 
 const QR_CELLS = [
   1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1,
@@ -14,40 +15,42 @@ const QR_CELLS = [
 
 function ConfigVisual() {
   return (
-    <div className="flex h-64 w-full max-w-sm flex-col gap-4 rounded-2xl border border-border bg-white p-5 shadow-soft-lg">
-      <div className="flex items-center gap-3">
-        <span className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-800" />
-        <div className="flex-1">
-          <div className="h-2 w-24 rounded-full bg-foreground/10" />
-          <div className="mt-1.5 h-2 w-16 rounded-full bg-foreground/10" />
+    <TiltCard strength={3} className="w-full max-w-sm">
+      <div className="flex h-64 w-full flex-col gap-4 rounded-2xl border border-border bg-white p-5 shadow-soft-lg transition-shadow duration-300 hover:shadow-soft-xl">
+        <div className="flex items-center gap-3">
+          <span className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-800" />
+          <div className="flex-1">
+            <div className="h-2 w-24 rounded-full bg-foreground/10" />
+            <div className="mt-1.5 h-2 w-16 rounded-full bg-foreground/10" />
+          </div>
+        </div>
+        <div>
+          <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+            Couleur de marque
+          </p>
+          <div className="mt-2 flex gap-2">
+            {["bg-primary-500", "bg-ink", "bg-gold-400", "bg-emerald-500"].map((c, i) => (
+              <span
+                key={c}
+                className={cn(
+                  "h-7 w-7 rounded-full ring-2 ring-offset-2",
+                  c,
+                  i === 0 ? "ring-primary-500" : "ring-transparent"
+                )}
+              />
+            ))}
+          </div>
+        </div>
+        <div>
+          <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+            Règle de points
+          </p>
+          <div className="mt-2 flex items-center gap-2 rounded-xl border border-border px-3 py-2 text-xs text-foreground/80">
+            1€ dépensé = 1 point
+          </div>
         </div>
       </div>
-      <div>
-        <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-          Couleur de marque
-        </p>
-        <div className="mt-2 flex gap-2">
-          {["bg-primary-500", "bg-ink", "bg-gold-400", "bg-emerald-500"].map((c, i) => (
-            <span
-              key={c}
-              className={cn(
-                "h-7 w-7 rounded-full ring-2 ring-offset-2",
-                c,
-                i === 0 ? "ring-primary-500" : "ring-transparent"
-              )}
-            />
-          ))}
-        </div>
-      </div>
-      <div>
-        <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-          Règle de points
-        </p>
-        <div className="mt-2 flex items-center gap-2 rounded-xl border border-border px-3 py-2 text-xs text-foreground/80">
-          1€ dépensé = 1 point
-        </div>
-      </div>
-    </div>
+    </TiltCard>
   );
 }
 
@@ -79,62 +82,76 @@ function NotificationVisual() {
 }
 
 function StatsVisual() {
+  const reduceMotion = useReducedMotion();
   const bars = [40, 65, 50, 80, 70, 95];
   return (
-    <div className="flex h-64 w-full max-w-sm flex-col justify-end gap-4 rounded-2xl border border-border bg-white p-6 shadow-soft-lg">
-      <div className="flex items-center gap-2 text-muted-foreground">
-        <BarChart3 className="h-4 w-4" />
-        <p className="text-xs font-medium">Visites par semaine</p>
+    <TiltCard strength={3} className="w-full max-w-sm">
+      <div className="flex h-64 w-full flex-col justify-end gap-4 rounded-2xl border border-border bg-white p-6 shadow-soft-lg transition-shadow duration-300 hover:shadow-soft-xl">
+        <div className="flex items-center gap-2 text-muted-foreground">
+          <BarChart3 className="h-4 w-4" />
+          <p className="text-xs font-medium">Visites par semaine</p>
+        </div>
+        <div className="flex h-32 items-end gap-2.5">
+          {bars.map((h, i) => (
+            <motion.span
+              key={i}
+              initial={{ height: reduceMotion ? `${h}%` : 0 }}
+              whileInView={{ height: `${h}%` }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={
+                reduceMotion
+                  ? { duration: 0 }
+                  : { duration: 0.6, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }
+              }
+              className="flex-1 rounded-t-md bg-gradient-to-t from-primary-600 to-primary-400"
+            />
+          ))}
+        </div>
       </div>
-      <div className="flex h-32 items-end gap-2.5">
-        {bars.map((h, i) => (
-          <span
-            key={i}
-            className="flex-1 rounded-t-md bg-gradient-to-t from-primary-600 to-primary-400"
-            style={{ height: `${h}%` }}
-          />
-        ))}
-      </div>
-    </div>
+    </TiltCard>
   );
 }
 
 function MultiStoreVisual() {
   return (
-    <div className="flex h-64 w-full max-w-sm items-center justify-center gap-6 rounded-2xl border border-border bg-white p-6 shadow-soft-lg">
-      <div className="flex flex-col gap-3">
-        {[1, 2, 3].map((i) => (
-          <span key={i} className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary text-muted-foreground">
-            <Store className="h-4 w-4" />
-          </span>
-        ))}
+    <TiltCard strength={3} className="w-full max-w-sm">
+      <div className="flex h-64 w-full items-center justify-center gap-6 rounded-2xl border border-border bg-white p-6 shadow-soft-lg transition-shadow duration-300 hover:shadow-soft-xl">
+        <div className="flex flex-col gap-3">
+          {[1, 2, 3].map((i) => (
+            <span key={i} className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary text-muted-foreground">
+              <Store className="h-4 w-4" />
+            </span>
+          ))}
+        </div>
+        <div className="h-px flex-1 border-t border-dashed border-border" />
+        <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-ink text-white">
+          <LayoutDashboard className="h-6 w-6" />
+        </span>
       </div>
-      <div className="h-px flex-1 border-t border-dashed border-border" />
-      <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-ink text-white">
-        <LayoutDashboard className="h-6 w-6" />
-      </span>
-    </div>
+    </TiltCard>
   );
 }
 
 function PersonalizationVisual() {
   return (
-    <div className="flex h-64 w-full max-w-sm items-center justify-center rounded-2xl border border-border bg-white p-6 shadow-soft-lg">
-      <div className="flex flex-col items-center gap-4">
-        <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-          <Palette className="h-6 w-6" />
-        </span>
-        <div className="flex gap-2">
-          {["bg-primary-500", "bg-gold-400", "bg-emerald-500", "bg-rose-400"].map((c) => (
-            <span key={c} className={cn("h-6 w-6 rounded-full", c)} />
-          ))}
-        </div>
-        <div className="w-40 rounded-xl bg-gradient-to-br from-primary-500 to-ink p-3">
-          <p className="text-[10px] font-medium text-white/70">Aperçu de la carte</p>
-          <p className="mt-1 text-xs font-semibold text-white">Votre Commerce</p>
+    <TiltCard strength={3} className="w-full max-w-sm">
+      <div className="flex h-64 w-full items-center justify-center rounded-2xl border border-border bg-white p-6 shadow-soft-lg transition-shadow duration-300 hover:shadow-soft-xl">
+        <div className="flex flex-col items-center gap-4">
+          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+            <Palette className="h-6 w-6" />
+          </span>
+          <div className="flex gap-2">
+            {["bg-primary-500", "bg-gold-400", "bg-emerald-500", "bg-rose-400"].map((c) => (
+              <span key={c} className={cn("h-6 w-6 rounded-full", c)} />
+            ))}
+          </div>
+          <div className="w-40 rounded-xl bg-gradient-to-br from-primary-500 to-ink p-3">
+            <p className="text-[10px] font-medium text-white/70">Aperçu de la carte</p>
+            <p className="mt-1 text-xs font-semibold text-white">Votre Commerce</p>
+          </div>
         </div>
       </div>
-    </div>
+    </TiltCard>
   );
 }
 

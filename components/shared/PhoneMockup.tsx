@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
+import { CountUp } from "@/components/shared/CountUp";
 
 type Variant = "apple" | "google";
 type Screen = "wallet" | "lockscreen";
@@ -50,7 +51,9 @@ function WalletCard() {
       <div className="relative mt-8 flex items-end justify-between">
         <div>
           <p className="text-[10px] uppercase tracking-widest text-white/50">Points</p>
-          <p className="font-mono text-2xl font-semibold text-gold-200">1 240</p>
+          <p className="font-mono text-2xl font-semibold text-gold-200">
+            <CountUp value={1240} />
+          </p>
         </div>
         <QrPattern />
       </div>
