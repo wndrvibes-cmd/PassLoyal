@@ -27,8 +27,8 @@ export function Values() {
             const Icon = icons[value.icon];
             return (
               <RevealOnScroll key={value.title} delay={index * 0.08}>
-                <div className="flex h-full gap-5 rounded-3xl border border-border bg-white p-7 shadow-soft">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <div className="group flex h-full gap-5 rounded-3xl border border-border bg-white p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-soft-lg">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
                     <Icon className="h-5 w-5" strokeWidth={2.25} />
                   </span>
                   <div>

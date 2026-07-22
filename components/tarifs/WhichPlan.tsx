@@ -34,8 +34,8 @@ export function WhichPlan() {
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {recommendations.map((rec, index) => (
             <RevealOnScroll key={rec.plan} delay={index * 0.08}>
-              <div className="flex h-full flex-col items-center gap-4 rounded-3xl border border-border bg-white p-7 text-center shadow-soft">
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <div className="group flex h-full flex-col items-center gap-4 rounded-3xl border border-border bg-white p-7 text-center shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-soft-lg">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
                   <rec.icon className="h-5 w-5" strokeWidth={2.25} />
                 </span>
                 <p className="text-sm text-muted-foreground">{rec.profile}</p>

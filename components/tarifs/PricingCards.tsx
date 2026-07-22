@@ -74,10 +74,10 @@ export function PricingCards() {
             <RevealOnScroll key={plan.id} delay={index * 0.08}>
               <div
                 className={cn(
-                  "relative flex h-full flex-col rounded-3xl border p-8 transition-shadow duration-300",
+                  "relative flex h-full flex-col rounded-3xl border p-8 transition-all duration-300",
                   plan.highlighted
                     ? "border-primary/30 bg-ink text-white shadow-soft-xl lg:-translate-y-4"
-                    : "border-border bg-white shadow-soft hover:shadow-soft-lg"
+                    : "border-border bg-white shadow-soft hover:-translate-y-1 hover:shadow-soft-lg"
                 )}
               >
                 {plan.highlighted ? (

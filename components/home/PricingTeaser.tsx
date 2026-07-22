@@ -23,10 +23,10 @@ export function PricingTeaser() {
             <RevealOnScroll key={plan.id} delay={index * 0.08}>
               <div
                 className={cn(
-                  "flex h-full flex-col rounded-3xl border p-8",
+                  "flex h-full flex-col rounded-3xl border p-8 transition-all duration-300",
                   plan.highlighted
-                    ? "border-primary/30 bg-ink text-white shadow-soft-xl"
-                    : "border-border bg-white shadow-soft"
+                    ? "border-primary/30 bg-ink text-white shadow-soft-xl hover:shadow-soft-xl"
+                    : "border-border bg-white shadow-soft hover:-translate-y-1 hover:shadow-soft-lg"
                 )}
               >
                 <h3 className="text-lg font-semibold tracking-tight">{plan.name}</h3>
