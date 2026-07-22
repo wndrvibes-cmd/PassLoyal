@@ -58,25 +58,51 @@ function QrVisual() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="relative flex h-64 w-full max-w-sm items-center justify-center rounded-2xl bg-ink">
-      <div className="grid grid-cols-5 gap-[3px] rounded-lg bg-white p-2.5">
-        {QR_CELLS.map((filled, i) => (
-          <span key={i} className={cn("h-2.5 w-2.5 rounded-[1px]", filled ? "bg-ink" : "bg-transparent")} />
-        ))}
+    <div className="relative flex h-64 w-full max-w-sm items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-b from-ink to-[#151b36]">
+      {/* Counter stand holding the QR code */}
+      <div className="relative flex flex-col items-center">
+        <div className="relative overflow-hidden rounded-xl bg-white p-3 shadow-soft-xl">
+          <div className="grid grid-cols-5 gap-[3px]">
+            {QR_CELLS.map((filled, i) => (
+              <span key={i} className={cn("h-3 w-3 rounded-[1px]", filled ? "bg-ink" : "bg-transparent")} />
+            ))}
+          </div>
+          {!reduceMotion ? (
+            <motion.span
+              className="absolute inset-x-0 h-8 bg-gradient-to-b from-primary-300/0 via-primary-300/50 to-primary-300/0"
+              animate={{ top: ["0%", "100%", "0%"] }}
+              transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+            />
+          ) : null}
+        </div>
+        <div className="h-8 w-2 bg-white/10" />
+        <div className="h-2 w-20 rounded-full bg-white/10" />
       </div>
-      <motion.span
-        className="absolute h-40 w-40 rounded-2xl border-2 border-primary-400"
-        animate={reduceMotion ? { opacity: 0.8 } : { scale: [1, 1.06, 1], opacity: [0.5, 1, 0.5] }}
-        transition={reduceMotion ? undefined : { duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+
+      {/* Phone silhouette approaching to scan */}
+      <motion.div
+        className="absolute -bottom-6 -right-6 h-32 w-20 rotate-[18deg] rounded-2xl border border-white/15 bg-white/[0.04] backdrop-blur-sm"
+        animate={reduceMotion ? undefined : { y: [0, -6, 0] }}
+        transition={reduceMotion ? undefined : { duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
       />
     </div>
   );
 }
 
 function NotificationVisual() {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <div className="flex h-64 w-full max-w-sm items-center justify-center">
-      <PhoneMockup variant="apple" screen="lockscreen" floating={false} className="w-[200px]" />
+    <div className="relative flex h-64 w-full max-w-sm items-center justify-center">
+      {!reduceMotion ? (
+        <motion.span
+          className="pointer-events-none absolute h-40 w-40 rounded-full border border-gold-300/40"
+          initial={{ opacity: 0.6, scale: 0.9 }}
+          animate={{ opacity: 0, scale: 1.6 }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+        />
+      ) : null}
+      <PhoneMockup variant="apple" screen="lockscreen" floating={false} className="relative w-[200px]" />
     </div>
   );
 }

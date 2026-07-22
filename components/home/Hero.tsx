@@ -110,14 +110,57 @@ export function Hero() {
             </div>
 
             <motion.div
-              className="absolute -right-2 top-6 z-20 hidden items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.07] px-3 py-2.5 shadow-soft-lg backdrop-blur-md sm:right-4 sm:top-10 sm:flex"
-              animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
+              className="absolute -left-2 top-40 z-20 hidden items-center gap-2.5 rounded-2xl border border-white/10 bg-white/[0.07] px-3 py-2.5 shadow-soft-lg backdrop-blur-md sm:left-2 sm:top-48 sm:flex"
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={
+                reduceMotion
+                  ? { opacity: 1, scale: 1 }
+                  : { opacity: 1, scale: 1, y: [0, 8, 0] }
+              }
               transition={
-                reduceMotion ? undefined : { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
+                reduceMotion
+                  ? { duration: 0.4, delay: 0.5 }
+                  : {
+                      opacity: { duration: 0.4, delay: 0.6 },
+                      scale: { duration: 0.4, delay: 0.6 },
+                      y: { duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.6 },
+                    }
               }
             >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold-400/20 text-gold-200">
-                <Sparkles className="h-4 w-4" />
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-ink">
+                <QrCode className="h-4 w-4" />
+              </span>
+              <p className="text-xs font-medium text-white">Scannez pour ajouter</p>
+            </motion.div>
+
+            <motion.div
+              className="absolute -right-2 top-6 z-20 hidden items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.07] px-3 py-2.5 shadow-soft-lg backdrop-blur-md sm:right-4 sm:top-10 sm:flex"
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={
+                reduceMotion
+                  ? { opacity: 1, scale: 1 }
+                  : { opacity: 1, scale: 1, y: [0, -8, 0] }
+              }
+              transition={
+                reduceMotion
+                  ? { duration: 0.4, delay: 1 }
+                  : {
+                      opacity: { duration: 0.4, delay: 1.1 },
+                      scale: { duration: 0.4, delay: 1.1 },
+                      y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.1 },
+                    }
+              }
+            >
+              <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold-400/20 text-gold-200">
+                {!reduceMotion ? (
+                  <motion.span
+                    className="absolute inset-0 rounded-full bg-gold-300/60"
+                    initial={{ opacity: 0.9, scale: 0.6 }}
+                    animate={{ opacity: 0, scale: 2.2 }}
+                    transition={{ duration: 0.9, delay: 1.1, ease: "easeOut" }}
+                  />
+                ) : null}
+                <Sparkles className="relative h-4 w-4" />
               </span>
               <div>
                 <p className="text-[10px] uppercase tracking-wider text-ink-muted">Récompense</p>
@@ -125,19 +168,6 @@ export function Hero() {
                   +<CountUp value={50} /> points
                 </p>
               </div>
-            </motion.div>
-
-            <motion.div
-              className="absolute -left-2 top-40 z-20 hidden items-center gap-2.5 rounded-2xl border border-white/10 bg-white/[0.07] px-3 py-2.5 shadow-soft-lg backdrop-blur-md sm:left-2 sm:top-48 sm:flex"
-              animate={reduceMotion ? undefined : { y: [0, 8, 0] }}
-              transition={
-                reduceMotion ? undefined : { duration: 5.5, repeat: Infinity, ease: "easeInOut" }
-              }
-            >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-ink">
-                <QrCode className="h-4 w-4" />
-              </span>
-              <p className="text-xs font-medium text-white">Scannez pour ajouter</p>
             </motion.div>
           </TiltCard>
         </motion.div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { PageHero } from "@/components/shared/PageHero";
+import { Transformation } from "@/components/a-propos/Transformation";
 import { Story } from "@/components/a-propos/Story";
 import { Mission } from "@/components/a-propos/Mission";
 import { Values } from "@/components/a-propos/Values";
@@ -22,6 +23,7 @@ export default function AProposPage() {
         title="Construisons ensemble la nouvelle génération de fidélité locale"
         description="PassLoyal est actuellement en phase de lancement — une conviction simple nous guide : la fidélisation client ne devrait jamais être une contrainte."
       />
+      <Transformation />
       <Story />
       <Mission />
       <Values />

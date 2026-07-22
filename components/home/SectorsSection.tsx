@@ -36,31 +36,33 @@ export function SectorsSection() {
             return (
               <RevealOnScroll key={sector.label} delay={(index % 4) * 0.06}>
                 <motion.div
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                  className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border border-border bg-white p-6 shadow-soft transition-shadow duration-300 hover:shadow-soft-lg"
+                  whileHover="hover"
+                  initial="rest"
+                  animate="rest"
+                  className={cn(
+                    "group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-3xl bg-gradient-to-br p-6 shadow-soft",
+                    sector.tone
+                  )}
                 >
-                  <div
-                    className={cn(
-                      "pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gradient-to-br opacity-[0.08] blur-xl transition-opacity duration-300 group-hover:opacity-[0.16]",
-                      sector.tone
-                    )}
-                  />
-                  <motion.span
-                    whileHover={{ rotate: -6, scale: 1.06 }}
-                    transition={{ duration: 0.2 }}
-                    className={cn(
-                      "relative flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br text-white shadow-soft",
-                      sector.tone
-                    )}
+                  <motion.div
+                    variants={{ rest: { scale: 1, rotate: 0 }, hover: { scale: 1.15, rotate: -6 } }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className="pointer-events-none absolute -right-6 -top-6 text-white/15"
                   >
+                    <Icon className="h-32 w-32" strokeWidth={1} />
+                  </motion.div>
+
+                  <div
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-black/0 to-black/10"
+                    aria-hidden
+                  />
+
+                  <span className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-white backdrop-blur">
                     <Icon className="h-5 w-5" strokeWidth={2} />
-                  </motion.span>
-                  <div className="relative">
-                    <h3 className="text-base font-semibold tracking-tight">{sector.label}</h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                      {sector.pitch}
-                    </p>
+                  </span>
+                  <div className="relative mt-4">
+                    <h3 className="text-lg font-semibold tracking-tight text-white">{sector.label}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-white/80">{sector.pitch}</p>
                   </div>
                 </motion.div>
               </RevealOnScroll>
